@@ -176,17 +176,21 @@
       if (!img.getAttribute('decoding')) { img.setAttribute('decoding', 'async'); }
       if (index > 1 && !img.getAttribute('loading')) { img.setAttribute('loading', 'lazy'); }
 
-      img.addEventListener('error', function () {
-        if (img.dataset.fallbackDone === '1') { return; }
-        img.dataset.fallbackDone = '1';
-        var box = document.createElement('div');
-        box.className = 'img-fallback';
-        box.setAttribute('role', 'img');
-        box.setAttribute('aria-label', img.getAttribute('alt') || 'Image indisponible');
-        box.textContent = 'Image a ajouter : ' + (img.getAttribute('src') || '');
-        if (img.parentNode) { img.parentNode.replaceChild(box, img); }
-      });
+      img.addEventListener('error', function () { showFallback(img); });
+      // Image deja en erreur avant l initialisation du script :
+      if (img.complete && img.naturalWidth === 0) { showFallback(img); }
     });
+  }
+
+  function showFallback(img) {
+    if (!img || img.dataset.fallbackDone === '1') { return; }
+    img.dataset.fallbackDone = '1';
+    var box = document.createElement('div');
+    box.className = 'img-fallback';
+    box.setAttribute('role', 'img');
+    box.setAttribute('aria-label', img.getAttribute('alt') || 'Image indisponible');
+    box.textContent = 'Image a ajouter : ' + (img.getAttribute('src') || '');
+    if (img.parentNode) { img.parentNode.replaceChild(box, img); }
   }
 
   /* ---------------------------------------------------------------------
