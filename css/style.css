@@ -359,3 +359,17 @@ a[href*="instagram"]:hover { transform: translateY(-2px); }
   .site { max-width: none !important; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 10px; }
 }
+
+/* Cadres de remplacement : tailles adaptees au contexte */
+nav .img-fallback {
+  max-width: 240px;
+  min-height: 44px;
+  font-size: 10px;
+  padding: 8px 10px;
+}
+
+[style*="aspect-ratio"] > .img-fallback {
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
