@@ -200,6 +200,10 @@
     var videos = document.querySelectorAll('video');
     Array.prototype.forEach.call(videos, function (video) {
       video.setAttribute('playsinline', '');
+      video.addEventListener('error', function () {
+        var card = video.parentNode;
+        if (card && card.style) { card.style.display = 'none'; }
+      });
       video.addEventListener('play', function () {
         Array.prototype.forEach.call(videos, function (other) {
           if (other !== video && !other.paused) { other.pause(); }
