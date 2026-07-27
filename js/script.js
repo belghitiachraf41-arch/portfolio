@@ -263,6 +263,86 @@
   }
 
   /* ---------------------------------------------------------------------
+     9. Curseur personnalise anime (point + halo + trainee)
+     --------------------------------------------------------------------- */
+  function initCursor() {
+    if (!window.matchMedia || !window.requestAnimationFrame || !document.body) { return; }
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!fine.matches || reduced.matches) { return; }
+
+    var ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    ring.setAttribute('aria-hidden', 'true');
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    dot.setAttribute('aria-hidden', 'true');
+
+    var TRAIL = 6;
+    var trail = [];
+    var i, node;
+    for (i = 0; i < TRAIL; i++) {
+      node = document.createElement('div');
+      node.className = 'cursor-trail';
+      node.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(node);
+      trail.push({ el: node, x: 0, y: 0 });
+    }
+    document.body.appendChild(ring);
+    document.body.appendChild(dot);
+    root.classList.add('has-custom-cursor');
+
+    var mx = window.innerWidth / 2;
+    var my = window.innerHeight / 2;
+    var dx = mx, dy = my, rx = mx, ry = my;
+    var started = false;
+    var INTERACTIVE = 'a, button, [role="button"], summary, label, input, textarea, select, img, video, [style*="aspect-ratio"]';
+
+    document.addEventListener('mousemove', function (ev) {
+      mx = ev.clientX;
+      my = ev.clientY;
+      if (!started) {
+        started = true;
+        dx = rx = mx;
+        dy = ry = my;
+        for (var k = 0; k < trail.length; k++) { trail[k].x = mx; trail[k].y = my; }
+        root.classList.add('cursor-visible');
+      }
+      var tgt = ev.target;
+      var over = tgt && tgt.closest ? tgt.closest(INTERACTIVE) : null;
+      if (over) { root.classList.add('cursor-hover'); } else { root.classList.remove('cursor-hover'); }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function () { root.classList.remove('cursor-visible'); });
+    document.addEventListener('mouseenter', function () { if (started) { root.classList.add('cursor-visible'); } });
+    document.addEventListener('mousedown', function () { root.classList.add('cursor-down'); });
+    document.addEventListener('mouseup', function () { root.classList.remove('cursor-down'); });
+    window.addEventListener('blur', function () { root.classList.remove('cursor-down'); });
+
+    function frame() {
+      dx += (mx - dx) * 0.35;
+      dy += (my - dy) * 0.35;
+      rx += (mx - rx) * 0.14;
+      ry += (my - ry) * 0.14;
+      dot.style.transform = 'translate3d(' + dx.toFixed(2) + 'px,' + dy.toFixed(2) + 'px,0)';
+      ring.style.transform = 'translate3d(' + rx.toFixed(2) + 'px,' + ry.toFixed(2) + 'px,0)';
+      var px = dx, py = dy, k, p, s;
+      for (k = 0; k < trail.length; k++) {
+        p = trail[k];
+        p.x += (px - p.x) * 0.32;
+        p.y += (py - p.y) * 0.32;
+        s = 1 - (k + 1) / (trail.length + 1);
+        p.el.style.transform = 'translate3d(' + p.x.toFixed(2) + 'px,' + p.y.toFixed(2) + 'px,0) scale(' + s.toFixed(3) + ')';
+        p.el.style.opacity = started ? (0.30 * s).toFixed(3) : '0';
+        px = p.x;
+        py = p.y;
+      }
+      window.requestAnimationFrame(frame);
+    }
+    window.requestAnimationFrame(frame);
+  }
+
+  /* ---------------------------------------------------------------------
      Initialisation
      --------------------------------------------------------------------- */
   function init() {
@@ -275,6 +355,7 @@
     safe(initVideos);
     safe(initToTop);
     safe(initYear);
+    safe(initCursor);
   }
 
   if (document.readyState === 'loading') {
