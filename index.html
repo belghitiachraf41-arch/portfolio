@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
+<html lang="fr"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Achraf Belghiti — Marketing Digital &amp; Développement Commercial</title>
   <meta name="description" content="Portfolio d'Achraf Belghiti — Junior en marketing digital et développement commercial, basé à Rabat, Maroc.">
-  <link rel="icon" href="images/ash-logo-sm.png">
+  <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
   <script>try{document.documentElement.setAttribute('data-theme', localStorage.getItem('ab-theme')||'dark');}catch(e){}</script>
+
+  <meta name="author" content="Achraf Belghiti">
+  <meta name="theme-color" content="#08080a">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Achraf Belghiti — Marketing Digital &amp; Développement Commercial">
+  <meta property="og:description" content="Portfolio d'Achraf Belghiti — Junior en marketing digital et développement commercial, basé à Rabat, Maroc.">
+  <meta property="og:url" content="https://belghitiachraf41-arch.github.io/portfolio/">
+  <meta property="og:image" content="https://belghitiachraf41-arch.github.io/portfolio/images/portrait/portrait.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://belghitiachraf41-arch.github.io/portfolio/">
+  <link rel="apple-touch-icon" href="./images/favicon.svg">
+<noscript><style>.nav-links{display:flex!important;flex-wrap:wrap}.nav-toggle{display:none!important}.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 
-<div class="site" style="background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; min-height:768px; width:1366px; overflow-x:hidden; margin:0 auto; transition:background 0.35s ease, color 0.35s ease;">
+<a class="visually-hidden" href="#about">Aller au contenu principal</a>
+<div class="site" style="background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; min-height:768px; max-width:1366px; width:100%; overflow-x:hidden; margin:0 auto; transition:background 0.35s ease, color 0.35s ease;">
 
   <!-- NAV -->
   <nav style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 6vw; background:var(--nav-bg); backdrop-filter:blur(10px); border-bottom:1px solid var(--bd1);">
-    <img src="images/ash-logo-sm.png" alt="ASH logo" style="height: 50px; width: auto; display: block">
-    <div style="display:flex; gap:32px; font-size:14px; color:var(--muted);">
+    <img src="./images/logos/ash-logo-sm.png" alt="ASH logo" style="height: 50px; width: auto; display: block" decoding="async" loading="eager" fetchpriority="high">
+    <div style="display:flex; gap:32px; font-size:14px; color:var(--muted);" id="nav-links" class="nav-links">
       <a href="#about" style="color:inherit; text-decoration:none;">About</a>
       <a href="#experience" style="color:inherit; text-decoration:none;">Experience</a>
       <a href="#skills" style="color:inherit; text-decoration:none;">Skills</a>
       <a href="#creations" style="color:inherit; text-decoration:none;">Créations</a>
       <a href="#contact" style="color:inherit; text-decoration:none;">Contact</a>
-      <a href="https://www.instagram.com/madebyashraf/" target="_blank" style="color:var(--accent-soft); text-decoration:none;">Instagram</a>
+      <a href="https://www.instagram.com/madebyashraf/" target="_blank" style="color:var(--accent-soft); text-decoration:none;" rel="noopener noreferrer">Instagram</a>
       <button id="theme-toggle" aria-label="Basculer le thème" style="display:inline-flex; align-items:center; background:transparent; color:var(--text); border:1px solid var(--bd3); border-radius:999px; padding:7px 14px; font-size:13px; font-family:inherit; cursor:pointer; line-height:1;">
         <span class="t-moon">🌙 Sombre</span><span class="t-sun">☀️ Clair</span>
       </button>
     </div>
-  </nav>
+  
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="nav-links" aria-expanded="false"><span></span><span></span><span></span></button>
+    </nav>
 
   <!-- HERO -->
   <section data-screen-label="Hero" style="display:grid; grid-template-columns: 1.1fr 0.9fr; align-items:center; gap:40px; padding:80px 6vw 100px; min-height:82vh;">
@@ -49,20 +65,21 @@
         Junior en marketing digital et développement commercial, avec expérience en vente et relation client. À l'aise avec les outils CRM, WordPress/CMS et Canva — motivé par la conversion et la croissance commerciale via des solutions numériques concrètes.
       </p>
       <div style="display:flex; gap:16px; flex-wrap:wrap;">
-        <a href="#experience" style="display:inline-flex; align-items:center; gap:10px; background:#0215ae; color:var(--text); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none;">
+        <a href="#experience" style="display:inline-flex; align-items:center; gap:10px; background:#0215ae; color:#ffffff; font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none;">
           Mon parcours ↓
         </a>
         <a href="#contact" style="display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none; border:1px solid var(--bd4);">
           Me contacter
         </a>
+          <a href="./documents/CV-Achraf-Belghiti.pdf" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none; border:1px solid var(--bd4);">Voir mon CV</a>
       </div>
     </div>
 
     <div style="position:relative; animation:fadeUp 0.9s ease 0.1s both;">
       <div style="aspect-ratio: 4/5; border-radius: 24px; border: 1px solid var(--bd1); position: relative; overflow: hidden">
-        <img src="images/portrait.jpg" alt="Achraf Belghiti" style="width:100%; height:100%; object-fit:cover; display:block;">
+        <img src="./images/portrait/portrait.jpg" alt="Achraf Belghiti" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="eager" fetchpriority="high">
       </div>
-      <div style="position:absolute; bottom:-18px; left:-18px; background:#0215ae; color:var(--text); padding:16px 22px; border-radius:16px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+      <div style="position:absolute; bottom:-18px; left:-18px; background:#0215ae; color:#ffffff; padding:16px 22px; border-radius:16px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
         Rabat, Maroc
       </div>
     </div>
@@ -149,7 +166,7 @@
         <div class="edu-card" style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
           <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
             <div style="display:flex; align-items:center; gap:14px;">
-              <img src="images/ismagi-logo.png" alt="Logo ISMAGI" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;">
+              <img src="./images/logos/ismagi-logo.png" alt="Logo ISMAGI" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy">
               <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">ISMAGI</div>
             </div>
             <div style="font-size:13px; color:var(--muted2);">2025 — 2026 · Rabat</div>
@@ -160,7 +177,7 @@
         <div class="edu-card" style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
           <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
             <div style="display:flex; align-items:center; gap:14px;">
-              <img src="images/ofppt-logo-sm.png" alt="Logo OFPPT" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;">
+              <img src="./images/logos/ofppt-logo-sm.png" alt="Logo OFPPT" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy">
               <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">Institut Spécialisé de Technologie Appliquée Hay Riad</div>
             </div>
             <div style="font-size:13px; color:var(--muted2);">2022 — 2025 · Rabat</div>
@@ -189,9 +206,9 @@
           <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Connaissance des produits/services</span>
           <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Compétences en négociation</span>
           <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Gestion du temps</span>
-          <span style="padding:12px 20px; border-radius:999px; background:#0215ae; color:var(--text); font-weight:600; font-size:14px;">WordPress / CMS</span>
-          <span style="padding:12px 20px; border-radius:999px; background:#0215ae; color:var(--text); font-weight:600; font-size:14px;">Outils CRM</span>
-          <span style="padding:12px 20px; border-radius:999px; background:#0215ae; color:var(--text); font-weight:600; font-size:14px;">Canva</span>
+          <span style="padding:12px 20px; border-radius:999px; background:#0215ae; color:#ffffff; font-weight:600; font-size:14px;">WordPress / CMS</span>
+          <span style="padding:12px 20px; border-radius:999px; background:#0215ae; color:#ffffff; font-weight:600; font-size:14px;">Outils CRM</span>
+          <span style="padding:12px 20px; border-radius:999px; background:#0215ae; color:#ffffff; font-weight:600; font-size:14px;">Canva</span>
           <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Stratégie de contenu</span>
         </div>
 
@@ -218,7 +235,7 @@
       </div>
       <div>
         <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
-          <span style="padding:8px 16px; border-radius:999px; background:#0215ae; color:var(--text); font-weight:600; font-size:13px;">Dunkin</span>
+          <span style="padding:8px 16px; border-radius:999px; background:#0215ae; color:#ffffff; font-weight:600; font-size:13px;">Dunkin</span>
           <span style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); font-size:13px;">ASH Coffee</span>
           <span style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); font-size:13px;">ASH Airways</span>
           <span style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); font-size:13px;">Luma</span>
@@ -227,16 +244,16 @@
         <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px;">
 
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
-            <video src="images/creations/video-1.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
+            <video src="./images/creations/video-1.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
-            <video src="images/creations/video-2.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
+            <video src="./images/creations/video-2.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
-            <video src="images/creations/video-3.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
+            <video src="./images/creations/video-3.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
-            <video src="images/creations/video-4.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
+            <video src="./images/creations/video-4.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
 
         </div>
@@ -244,53 +261,53 @@
         <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
 
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-summer-2026.jpeg" alt="Campagne Dunkin été 2026" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/dunkin-summer-2026.jpeg" alt="Campagne Dunkin été 2026" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-pool-pink-pineapple.jpeg" alt="Dunkin Pink Pineapple" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/dunkin-pool-pink-pineapple.jpeg" alt="Dunkin Pink Pineapple" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-beach-donut.jpeg" alt="Dunkin plage" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/ash-coffee-bearmilk.jpg" alt="ASH Coffee Bear Milk" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/ash-donut-menu.jpg" alt="ASH menu de donuts" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/ash-airways-huddle.jpg" alt="ASH Airways — équipe nationale" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/dunkin-beach-donut.jpeg" alt="Dunkin plage" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
 
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/ash-airways-stewardess.jpg" alt="ASH Airways campagne" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/ash-coffee-bearmilk.jpg" alt="ASH Coffee Bear Milk" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/ash-jersey-train.jpg" alt="ASH — maillot Maroc" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/ash-donut-menu.jpg" alt="ASH menu de donuts" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/luma-bags.jpg" alt="Luma — packaging" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-car-window.jpeg" alt="Dunkin lifestyle" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-flowers.jpeg" alt="Dunkin fleurs" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-passenger-princess.jpeg" alt="Dunkin passenger princess" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/ash-airways-huddle.jpg" alt="ASH Airways — équipe nationale" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
 
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-kitten-meme.jpeg" alt="Dunkin — contenu humoristique" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/ash-airways-stewardess.jpg" alt="ASH Airways campagne" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-spongebob-meme.jpeg" alt="Dunkin — contenu humoristique" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/ash-jersey-train.jpg" alt="ASH — maillot Maroc" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
           <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="images/creations/dunkin-highway-meme.jpeg" alt="Dunkin — contenu humoristique" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="./images/creations/luma-bags.jpg" alt="Luma — packaging" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+
+          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img src="./images/creations/dunkin-car-window.jpeg" alt="Dunkin lifestyle" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img src="./images/creations/dunkin-flowers.jpeg" alt="Dunkin fleurs" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img src="./images/creations/dunkin-passenger-princess.jpeg" alt="Dunkin passenger princess" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+
+          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img src="./images/creations/dunkin-kitten-meme.jpeg" alt="Dunkin — contenu humoristique" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img src="./images/creations/dunkin-spongebob-meme.jpeg" alt="Dunkin — contenu humoristique" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img src="./images/creations/dunkin-highway-meme.jpeg" alt="Dunkin — contenu humoristique" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
 
         </div>
@@ -314,16 +331,22 @@
     <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,5vw,56px); margin:0 0 20px;">Travaillons ensemble.</h2>
     <p style="font-size:17px; color:var(--muted); margin:0 0 40px;">Disponible pour des opportunités en marketing digital et développement commercial.</p>
     <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; font-size:16px;">
-      <a href="mailto:belghitiachraf41@gmail.com" style="color:var(--text); background:#0215ae; padding:16px 28px; border-radius:999px; text-decoration:none; font-weight:600;">belghitiachraf41@gmail.com</a>
+      <a href="mailto:belghitiachraf41@gmail.com" style="color:#ffffff; background:#0215ae; padding:16px 28px; border-radius:999px; text-decoration:none; font-weight:600;">belghitiachraf41@gmail.com</a>
       <a href="tel:+212655531774" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;">+212 655 531 774</a>
-      <a href="https://linkedin.com/in/achrafbelghiti" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;">LinkedIn @achrafbelghiti</a>
-      <a href="https://www.instagram.com/madebyashraf/" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;">Instagram @madebyashraf</a>
+          <a href="./documents/CV-Achraf-Belghiti.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;">Voir mon CV (PDF)</a>
+      <a href="https://linkedin.com/in/achrafbelghiti" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;" rel="noopener noreferrer">LinkedIn @achrafbelghiti</a>
+      <a href="https://www.instagram.com/madebyashraf/" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;" rel="noopener noreferrer">Instagram @madebyashraf</a>
     </div>
     <div style="margin-top:80px; font-size:13px; color:var(--muted3);">Rabat, Maroc — Hay El Menzeh</div>
   </section>
 
-</div>
 
-<script src="js/script.js"></script>
-</body>
-</html>
+
+    <footer style="padding:44px 6vw 60px; border-top:1px solid var(--bd1); display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; font-size:13px; color:var(--muted3);"><span>© <span data-year="">2026</span> Achraf Belghiti — Tous droits réservés.</span><span>Site statique HTML / CSS / JavaScript — hébergé sur GitHub Pages.</span></footer>
+
+  </div>
+
+<script src="./js/script.js" defer=""></script>
+
+
+</body></html>
