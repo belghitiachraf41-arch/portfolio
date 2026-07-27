@@ -198,12 +198,23 @@
      --------------------------------------------------------------------- */
   function initVideos() {
     var videos = document.querySelectorAll('video');
+    var failed = 0;
     Array.prototype.forEach.call(videos, function (video) {
       video.setAttribute('playsinline', '');
+
+      // Fichier video absent : on masque la vignette, puis le bloc entier
       video.addEventListener('error', function () {
         var card = video.parentNode;
         if (card && card.style) { card.style.display = 'none'; }
+        failed++;
+        if (failed >= videos.length) {
+          var grid = card ? card.parentNode : null;
+          if (grid && grid.style) { grid.style.display = 'none'; }
+          var label = grid ? grid.previousElementSibling : null;
+          if (label && label.style) { label.style.display = 'none'; }
+        }
       });
+
       video.addEventListener('play', function () {
         Array.prototype.forEach.call(videos, function (other) {
           if (other !== video && !other.paused) { other.pause(); }
