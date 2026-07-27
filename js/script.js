@@ -199,21 +199,30 @@
   function initVideos() {
     var videos = document.querySelectorAll('video');
     var failed = 0;
+
+    function markFailed(video) {
+      if (video.dataset.failed === '1') { return; }
+      video.dataset.failed = '1';
+      var card = video.parentNode;
+      if (card && card.style) { card.style.display = 'none'; }
+      failed++;
+      if (failed >= videos.length) {
+        var grid = card ? card.parentNode : null;
+        if (grid && grid.style) { grid.style.display = 'none'; }
+        var label = grid ? grid.previousElementSibling : null;
+        if (label && label.style) { label.style.display = 'none'; }
+      }
+    }
+
     Array.prototype.forEach.call(videos, function (video) {
       video.setAttribute('playsinline', '');
 
-      // Fichier video absent : on masque la vignette, puis le bloc entier
-      video.addEventListener('error', function () {
-        var card = video.parentNode;
-        if (card && card.style) { card.style.display = 'none'; }
-        failed++;
-        if (failed >= videos.length) {
-          var grid = card ? card.parentNode : null;
-          if (grid && grid.style) { grid.style.display = 'none'; }
-          var label = grid ? grid.previousElementSibling : null;
-          if (label && label.style) { label.style.display = 'none'; }
-        }
-      });
+      // Fichier absent : on masque la vignette, puis le bloc entier
+      video.addEventListener('error', function () { markFailed(video); });
+      if (video.error || video.networkState === 3) { markFailed(video); }
+      window.setTimeout(function () {
+        if (video.error || video.networkState === 3) { markFailed(video); }
+      }, 2500);
 
       video.addEventListener('play', function () {
         Array.prototype.forEach.call(videos, function (other) {
