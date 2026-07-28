@@ -716,3 +716,9 @@ body::before { opacity: 0.5; }
 @media (prefers-reduced-motion: reduce) {
   body { animation: none; }
 }
+
+/* FOND UNIQUE : image bg-blue-stripes.png (remplace tous les fonds precedents) */
+body{background:#000 !important;background-image:none !important;animation:none !important;}
+body::before{position:fixed !important;inset:0 !important;z-index:-2 !important;background:#000 url(../images/bg-blue-stripes.png) center center / cover no-repeat !important;filter:none !important;opacity:1 !important;transform:none !important;animation:none !important;}
+body::after{display:none !important;}
+.site{background:transparent !important;}
