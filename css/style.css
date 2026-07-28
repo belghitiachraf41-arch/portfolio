@@ -477,3 +477,6 @@ html[data-theme="light"] .cursor-ring {
   .has-custom-cursor,
   .has-custom-cursor * { cursor: auto; }
 }
+
+/* Logo de navigation : version blanche inversee en theme clair */
+[data-theme="light"] .nav-logo img{filter:invert(1);}
