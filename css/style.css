@@ -483,3 +483,72 @@ html[data-theme="light"] .cursor-ring {
 
 /* Badge Ouvert aux opportunites : vert plus fonce en theme clair */
 [data-theme="light"] .badge-open{color:#15803d !important; border-color:rgba(21,128,61,0.45) !important;}
+
+
+/* -------------------------------------------------------------------------
+   Fond anime (aurora + grille) : purement decoratif, ne gene pas la lecture
+   ------------------------------------------------------------------------- */
+
+/* Le conteneur devient transparent pour laisser voir le fond anime du body
+   (il porte un background inline dans index.html, d'ou le !important). */
+.site { background: transparent !important; }
+
+/* Couche 1 : halos "aurora" qui derivent lentement */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -25vmax;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(40vmax 40vmax at 22% 16%, rgba(2, 21, 174, 0.60), transparent 60%),
+    radial-gradient(30vmax 30vmax at 78% 10%, rgba(147, 164, 255, 0.28), transparent 62%),
+    radial-gradient(36vmax 36vmax at 68% 72%, rgba(2, 21, 174, 0.50), transparent 60%),
+    radial-gradient(26vmax 26vmax at 30% 88%, rgba(147, 164, 255, 0.20), transparent 62%),
+    radial-gradient(46vmax 46vmax at 50% 45%, rgba(2, 21, 174, 0.22), transparent 65%);
+  filter: blur(18px) saturate(115%);
+  animation: ab-aurora 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Couche 2 : grille fine qui defile en fondu vers le bas */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--bd1) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bd1) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(130% 95% at 50% 0%, #000 15%, transparent 72%);
+  mask-image: radial-gradient(130% 95% at 50% 0%, #000 15%, transparent 72%);
+  animation: ab-grid 38s linear infinite;
+}
+
+/* Theme clair : halos plus discrets */
+html[data-theme="light"] body::before { opacity: 0.4; }
+
+@keyframes ab-aurora {
+  0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate3d(3%, -2.5%, 0) scale(1.12) rotate(4deg); }
+  100% { transform: translate3d(-3%, 2%, 0) scale(1.06) rotate(-4deg); }
+}
+
+@keyframes ab-grid {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 64px 64px, 64px 64px; }
+}
+
+/* Mobile : moins de flou et grille plus serree (performance) */
+@media (max-width: 640px) {
+  body::before { filter: blur(12px) saturate(112%); animation-duration: 34s; }
+  body::after { background-size: 44px 44px; }
+}
+
+/* Accessibilite : aucune animation si l'utilisateur la refuse */
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after { animation: none !important; }
+}
