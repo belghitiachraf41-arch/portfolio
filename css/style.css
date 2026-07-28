@@ -552,3 +552,99 @@ html[data-theme="light"] body::before { opacity: 0.4; }
   body::before,
   body::after { animation: none !important; }
 }
+
+
+/* =========================================================================
+   ANIMATIONS AVANCEES
+   - revele au defilement (fondu + cascade)
+   - survol : elevation des cartes et des vignettes
+   - parallaxe du portrait
+   Tout est neutralise si prefers-reduced-motion: reduce
+   ------------------------------------------------------------------------- */
+
+/* --- 1. Revele au defilement : easing plus doux + cascade ---------------- */
+.reveal {
+  transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.reveal-zoom {
+  transform: translate3d(0, 18px, 0) scale(0.96);
+}
+.reveal.reveal-zoom.is-visible {
+  transform: none;
+}
+
+/* --- 2. Survol : elevation des cartes ----------------------------------- */
+.lift {
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease,
+              opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.lift:hover,
+.lift:focus-within {
+  transform: translate3d(0, -7px, 0);
+  border-color: var(--bd4);
+  box-shadow: 0 22px 45px -22px rgba(0, 0, 0, 0.65);
+}
+
+/* --- 3. Survol : elevation des vignettes (creations) -------------------- */
+.lift-media {
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.45s ease,
+              opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.lift-media:hover,
+.lift-media:focus-within {
+  transform: translate3d(0, -6px, 0) scale(1.015);
+  box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+html[data-theme="light"] .lift:hover,
+html[data-theme="light"] .lift:focus-within,
+html[data-theme="light"] .lift-media:hover,
+html[data-theme="light"] .lift-media:focus-within {
+  box-shadow: 0 22px 45px -24px rgba(20, 20, 45, 0.28);
+}
+
+/* --- 4. Parallaxe du portrait ------------------------------------------- */
+.parallax-frame {
+  overflow: hidden;
+}
+.parallax-media {
+  transform: scale(1.14);
+  will-change: transform;
+}
+
+/* --- 5. Preferences et appareils tactiles ------------------------------- */
+@media (hover: none) {
+  .lift:hover,
+  .lift-media:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.reveal-zoom {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms;
+  }
+  .lift,
+  .lift-media {
+    transition: none;
+  }
+  .lift:hover,
+  .lift:focus-within,
+  .lift-media:hover,
+  .lift-media:focus-within {
+    transform: none;
+  }
+  .parallax-media {
+    transform: none;
+    will-change: auto;
+  }
+}
