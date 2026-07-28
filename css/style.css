@@ -648,3 +648,71 @@ html[data-theme="light"] .lift-media:focus-within {
     will-change: auto;
   }
 }
+
+
+/* =========================================================================
+   NOUVEAU FOND : degrade bleu electrique + stries verticales
+   (remplace l'ancien fond uni, garde les memes animations : derive + defilement)
+   ========================================================================= */
+:root,
+html[data-theme="dark"] {
+  --bg-stripe-gap: 34px;
+  --bg-stripe: rgba(255, 255, 255, 0.07);
+  --bg-grad: linear-gradient(90deg,
+    #000000 0%,
+    #01021c 10%,
+    #020863 30%,
+    #0413a8 48%,
+    #0a1fd8 68%,
+    #1330ff 86%,
+    #2540ff 100%);
+}
+
+html[data-theme="light"] {
+  --bg-stripe-gap: 34px;
+  --bg-stripe: rgba(255, 255, 255, 0.55);
+  --bg-grad: linear-gradient(90deg,
+    #eef1ff 0%,
+    #d3dbff 28%,
+    #a9b6ff 55%,
+    #6d82ff 80%,
+    #3a52ff 100%);
+}
+
+body {
+  background-color: #000000;
+  background-image:
+    repeating-linear-gradient(90deg,
+      var(--bg-stripe) 0,
+      var(--bg-stripe) 1px,
+      transparent 1px,
+      transparent var(--bg-stripe-gap)),
+    var(--bg-grad);
+  background-repeat: repeat, no-repeat;
+  background-size: var(--bg-stripe-gap) 100%, 100% 100%;
+  background-position: 0 0, 0 0;
+  background-attachment: fixed, fixed;
+  animation: ab-stripes 26s linear infinite;
+}
+
+/* Les halos aurora restent, un peu plus discrets sur le fond bleu */
+body::before { opacity: 0.5; }
+
+/* Les stries defilent lentement, comme la grille (ab-grid) */
+@keyframes ab-stripes {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: var(--bg-stripe-gap) 0, 0 0; }
+}
+
+/* Mobile : stries plus serrees */
+@media (max-width: 640px) {
+  body {
+    --bg-stripe-gap: 24px;
+    animation-duration: 30s;
+  }
+}
+
+/* Accessibilite : aucune animation si l'utilisateur la refuse */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+}
