@@ -19,7 +19,7 @@
   function initTheme() {
     var stored = null;
     try { stored = localStorage.getItem(THEME_KEY); } catch (e) { stored = null; }
-    var theme = stored || root.getAttribute('data-theme') || 'dark';
+    var theme = stored || root.getAttribute('data-theme') || 'light';
     applyTheme(theme);
 
     var btn = document.getElementById('theme-toggle');
