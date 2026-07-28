@@ -766,3 +766,113 @@ html[data-theme=light] .tp-overlay{background:rgba(18,22,48,0.28);}
 .tp-close:hover{opacity:1;}
 @media (max-width:480px){.tp-actions{flex-direction:column-reverse;}.tp-btn{width:100%;}}
 @media (prefers-reduced-motion:reduce){.tp-overlay,.tp-card,.tp-btn{transition:none !important;}}
+
+/* =========================================================================
+   NAVBAR - Glassmorphism (ilot flottant translucide)
+   ========================================================================= */
+
+/* .site avait overflow-x:hidden en style inline, ce qui creait un conteneur
+   de defilement et empechait position:sticky de fonctionner sur la navbar.
+   overflow-x:clip + overflow-y:visible clippe sans casser le sticky. */
+.site { overflow-x: clip !important; overflow-y: visible !important; }
+
+:root,
+html[data-theme="dark"] {
+  --nav-glass-bg: linear-gradient(180deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0.02) 100%), linear-gradient(180deg, rgba(6,8,26,0.58) 0%, rgba(6,8,26,0.42) 100%);
+  --nav-glass-bd: rgba(255,255,255,0.22);
+  --nav-glass-sh: 0 20px 44px -20px rgba(0,0,0,0.70);
+  --nav-glass-hi: inset 0 1px 0 rgba(255,255,255,0.34), inset 0 -1px 0 rgba(255,255,255,0.05);
+  --nav-glass-sheen: radial-gradient(130% 120% at 0% 0%, rgba(255,255,255,0.20), transparent 55%), radial-gradient(110% 130% at 100% 0%, rgba(3,20,175,0.28), transparent 60%);
+  --nav-pill-bg: rgba(255,255,255,0.13);
+  --nav-pill-bd: rgba(255,255,255,0.26);
+}
+
+html[data-theme="light"] {
+  --nav-glass-bg: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.62) 100%);
+  --nav-glass-bd: rgba(3,20,175,0.14);
+  --nav-glass-sh: 0 20px 44px -22px rgba(3,20,175,0.30);
+  --nav-glass-hi: inset 0 1px 0 rgba(255,255,255,0.90);
+  --nav-glass-sheen: radial-gradient(130% 120% at 0% 0%, rgba(255,255,255,0.70), transparent 55%), radial-gradient(110% 130% at 100% 0%, rgba(3,20,175,0.10), transparent 60%);
+  --nav-pill-bg: rgba(3,20,175,0.07);
+  --nav-pill-bd: rgba(3,20,175,0.16);
+}
+
+nav {
+  position: sticky !important;
+  top: 14px !important;
+  z-index: 60 !important;
+  margin: 14px 4vw 0 !important;
+  padding: 12px 14px 12px 22px !important;
+  border: 1px solid var(--nav-glass-bd) !important;
+  border-radius: 26px !important;
+  background: var(--nav-glass-bg) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(185%) !important;
+  backdrop-filter: blur(26px) saturate(185%) !important;
+  box-shadow: var(--nav-glass-sh), var(--nav-glass-hi) !important;
+  isolation: isolate;
+}
+
+/* Reflet diagonal typique du verre */
+nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--nav-glass-sheen);
+}
+
+.nav-links { gap: 6px !important; align-items: center; }
+
+.nav-links a {
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  line-height: 1;
+  transition: background 0.28s ease, border-color 0.28s ease, color 0.28s ease, transform 0.28s ease;
+}
+
+.nav-links a::after { display: none !important; }
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  background: var(--nav-pill-bg);
+  border-color: var(--nav-pill-bd);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.nav-links a.is-active {
+  background: var(--nav-pill-bg);
+  border-color: var(--nav-pill-bd);
+  color: var(--text);
+  box-shadow: var(--nav-glass-hi);
+}
+
+#theme-toggle { margin-left: 10px; border-radius: 999px !important; }
+.nav-toggle { border-color: var(--nav-glass-bd) !important; border-radius: 14px !important; }
+
+/* Repli si backdrop-filter absent : fond plus opaque pour rester lisible */
+@supports not ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html[data-theme="dark"] nav { background: rgba(12,12,24,0.92) !important; }
+  html[data-theme="light"] nav { background: rgba(255,255,255,0.95) !important; }
+}
+
+@media (max-width: 768px) {
+  nav {
+    top: 10px !important;
+    margin: 10px 3vw 0 !important;
+    padding: 10px 12px !important;
+    border-radius: 22px !important;
+  }
+  .nav-links { gap: 2px !important; align-items: stretch !important; }
+  .nav-links a { padding: 12px 14px; border-radius: 14px; }
+  .nav-links.is-open { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--nav-glass-bd); }
+  #theme-toggle { margin-left: 0; margin-top: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a { transition: none; }
+  .nav-links a:hover { transform: none; }
+}
