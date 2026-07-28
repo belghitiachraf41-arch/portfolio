@@ -364,3 +364,109 @@
     init();
   }
 })();
+
+
+/* =========================================================================
+   Achraf Belghiti - Portfolio
+   Animations complementaires (JavaScript natif, sans dependance) :
+     1. elevation des cartes et des vignettes au survol
+     2. revele au defilement en cascade
+     3. parallaxe du portrait
+   Chemin : ./js/script.js
+   ========================================================================= */
+(function () {
+  'use strict';
+
+  var reduce = false;
+  try {
+    reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  } catch (e) { reduce = false; }
+
+  function each(list, fn) { Array.prototype.forEach.call(list, fn); }
+
+  /* --- 1. Elevation au survol (cartes + vignettes) ----------------------- */
+  function initLift() {
+    each(document.querySelectorAll('.edu-card, [style*="border-radius:16px"]'), function (el) {
+      el.classList.add('lift');
+    });
+    each(document.querySelectorAll('[style*="border-radius:14px"]'), function (el) {
+      el.classList.add('lift-media');
+      el.classList.add('reveal-zoom');
+    });
+  }
+
+  /* --- 2. Revele au defilement en cascade -------------------------------- */
+  function initStagger(tries) {
+    if (reduce) { return; }
+    var items = document.querySelectorAll('.reveal');
+    if (!items.length) {
+      if ((tries || 0) < 12) {
+        setTimeout(function () { initStagger((tries || 0) + 1); }, 40);
+      }
+      return;
+    }
+    each(items, function (el) {
+      if (el.classList.contains('is-visible')) { return; }
+      var parent = el.parentNode;
+      if (!parent) { return; }
+      var step = parent.abRevealStep || 0;
+      parent.abRevealStep = step + 1;
+      var delay = Math.min(step * 70, 350);
+      if (delay > 0) { el.style.setProperty('--reveal-delay', delay + 'ms'); }
+    });
+  }
+
+  /* --- 3. Parallaxe du portrait ------------------------------------------ */
+  function initParallax() {
+    if (reduce || !('requestAnimationFrame' in window)) { return; }
+    var img = document.querySelector('img[src*="portrait"]');
+    if (!img) { return; }
+    var frame = img.parentNode;
+    if (frame && frame.classList) { frame.classList.add('parallax-frame'); }
+    img.classList.add('parallax-media');
+
+    var amplitude = 26;   // amplitude du deplacement, en pixels
+    var target = 0;
+    var current = 0;
+    var running = false;
+
+    function measure() {
+      var rect = img.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight || 1;
+      var span = vh / 2 + rect.height / 2;
+      var ratio = span ? (rect.top + rect.height / 2 - vh / 2) / span : 0;
+      if (ratio > 1) { ratio = 1; }
+      if (ratio < -1) { ratio = -1; }
+      target = ratio * amplitude;
+    }
+
+    function render() {
+      current += (target - current) * 0.14;
+      if (Math.abs(target - current) < 0.08) { current = target; }
+      img.style.transform = 'scale(1.14) translate3d(0, ' + current.toFixed(2) + 'px, 0)';
+      if (current !== target) { requestAnimationFrame(render); } else { running = false; }
+    }
+
+    function onMove() {
+      measure();
+      if (!running) { running = true; requestAnimationFrame(render); }
+    }
+
+    window.addEventListener('scroll', onMove, { passive: true });
+    window.addEventListener('resize', onMove);
+    if (img.complete) { onMove(); } else { img.addEventListener('load', onMove); }
+  }
+
+  /* --- Demarrage --------------------------------------------------------- */
+  function boot() {
+    try { initLift(); } catch (e) {}
+    try { initStagger(0); } catch (e) {}
+    try { initParallax(); } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
