@@ -480,3 +480,6 @@ html[data-theme="light"] .cursor-ring {
 
 /* Logo de navigation : version blanche inversee en theme clair */
 [data-theme="light"] .nav-logo img{filter:invert(1);}
+
+/* Badge Ouvert aux opportunites : vert plus fonce en theme clair */
+[data-theme="light"] .badge-open{color:#15803d !important; border-color:rgba(21,128,61,0.45) !important;}
