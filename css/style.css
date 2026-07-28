@@ -746,4 +746,4 @@ nav,.edu-card,.lift,.lb-tile,.to-top,#theme-toggle,[style*="border-radius:999px"
 body{background:#05060f !important;}
 html[data-theme=light] body{background:#f4f5fb !important;}
 html[data-theme=light] body::before{background:radial-gradient(46vmax 40vmax at 14% 16%,rgba(150,120,255,0.60),transparent 62%),radial-gradient(38vmax 34vmax at 84% 12%,rgba(90,200,255,0.55),transparent 64%),radial-gradient(44vmax 38vmax at 76% 80%,rgba(255,150,205,0.45),transparent 62%),radial-gradient(34vmax 30vmax at 20% 88%,rgba(120,235,215,0.40),transparent 64%),linear-gradient(160deg,#f8f9ff 0%,#eceeff 100%) !important;opacity:1 !important;}
-html[data-theme=light] body::after{background:rgba(255,255,255,0.70) !important;}
+html[data-theme=light] body::after{background:rgba(255,255,255,0.48) !important;}
