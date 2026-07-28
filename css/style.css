@@ -719,7 +719,7 @@ body::before { opacity: 0.5; }
 
 /* FOND UNIQUE : image bg-blue-stripes.png (remplace tous les fonds precedents) */
 body{background:#000 !important;background-image:none !important;animation:none !important;}
-body::before{position:fixed !important;inset:0 !important;z-index:-2 !important;background:#000 url(../images/bg-blue-stripes.png) center center / cover no-repeat !important;filter:none !important;opacity:1 !important;transform:none !important;animation:none !important;}
+body::before{position:fixed !important;inset:-25vmax !important;z-index:-2 !important;background:radial-gradient(46vmax 40vmax at 14% 16%,rgba(120,60,255,0.55),transparent 62%),radial-gradient(38vmax 34vmax at 84% 12%,rgba(0,190,255,0.42),transparent 64%),radial-gradient(44vmax 38vmax at 76% 80%,rgba(255,70,170,0.34),transparent 62%),radial-gradient(34vmax 30vmax at 20% 88%,rgba(0,220,190,0.26),transparent 64%),radial-gradient(64vmax 54vmax at 50% 48%,rgba(40,90,255,0.40),transparent 70%),linear-gradient(160deg,#04050e 0%,#0a0a20 48%,#06040f 100%) !important;background-repeat:no-repeat !important;filter:saturate(125%) !important;opacity:1 !important;animation:lg-mesh 38s ease-in-out infinite alternate !important;}
 body::after{display:none !important;}
 .site{background:transparent !important;}
 
@@ -739,3 +739,11 @@ nav{background:var(--lg-fill) !important;-webkit-backdrop-filter:var(--lg-blur) 
 .lb-btn,.lb-close,.lb-prev,.lb-next,.lb-figcap,.lb-count,.lb-expand{background:var(--lg-fill) !important;-webkit-backdrop-filter:var(--lg-blur) !important;backdrop-filter:var(--lg-blur) !important;border:1px solid var(--lg-bd) !important;box-shadow:var(--lg-sh),var(--lg-hi) !important;}
 .pcb-btn,.pcb-panel,.pcb-head,.pcb-close,.pcb-chip,.pcb-input,.pcb-send,.pcb-msg{background:var(--lg-fill) !important;-webkit-backdrop-filter:var(--lg-blur) !important;backdrop-filter:var(--lg-blur) !important;border:1px solid var(--lg-bd) !important;box-shadow:var(--lg-sh),var(--lg-hi) !important;color:var(--text) !important;}
 nav,.edu-card,.lift,.lb-tile,.to-top,#theme-toggle,[style*="border-radius:999px"]{transition:background 0.35s ease,border-color 0.35s ease,box-shadow 0.40s ease,transform 0.40s cubic-bezier(0.22,0.61,0.36,1) !important;}
+
+
+/* ============ FOND MESH GRADIENT (pour le liquid glass) ============ */
+@keyframes lg-mesh{0%{transform:translate3d(0,0,0) scale(1.02) rotate(0deg)}50%{transform:translate3d(-2.5%,2%,0) scale(1.10) rotate(3deg)}100%{transform:translate3d(2.5%,-2%,0) scale(1.05) rotate(-3deg)}}
+body{background:#05060f !important;}
+html[data-theme=light] body{background:#f4f5fb !important;}
+html[data-theme=light] body::before{background:radial-gradient(46vmax 40vmax at 14% 16%,rgba(150,120,255,0.60),transparent 62%),radial-gradient(38vmax 34vmax at 84% 12%,rgba(90,200,255,0.55),transparent 64%),radial-gradient(44vmax 38vmax at 76% 80%,rgba(255,150,205,0.45),transparent 62%),radial-gradient(34vmax 30vmax at 20% 88%,rgba(120,235,215,0.40),transparent 64%),linear-gradient(160deg,#f8f9ff 0%,#eceeff 100%) !important;opacity:1 !important;}
+html[data-theme=light] body::after{background:rgba(255,255,255,0.70) !important;}
