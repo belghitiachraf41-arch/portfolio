@@ -722,3 +722,5 @@ body{background:#000 !important;background-image:none !important;animation:none 
 body::before{position:fixed !important;inset:0 !important;z-index:-2 !important;background:#000 url(../images/bg-blue-stripes.png) center center / cover no-repeat !important;filter:none !important;opacity:1 !important;transform:none !important;animation:none !important;}
 body::after{display:none !important;}
 .site{background:transparent !important;}
+
+html[data-theme=light] body::after{display:block !important;background:rgba(255,255,255,0.88) !important;-webkit-mask-image:none !important;mask-image:none !important;animation:none !important;}
