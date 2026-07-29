@@ -888,15 +888,15 @@ nav::before {
 html[data-theme="dark"] {
   --proj-panel: rgba(13, 14, 26, 0.90);
   --proj-soft: rgba(255, 255, 255, 0.05);
-  --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 55%, rgba(0, 0, 0, 0.60) 100%);
-  --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.46) 55%, rgba(0, 0, 0, 0.74) 100%);
+  --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.72) 100%);
+  --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.56) 55%, rgba(0, 0, 0, 0.84) 100%);
 }
 
 html[data-theme="light"] {
   --proj-panel: rgba(252, 252, 255, 0.94);
   --proj-soft: rgba(10, 10, 15, 0.035);
-  --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 55%, rgba(0, 0, 0, 0.60) 100%);
-  --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.46) 55%, rgba(0, 0, 0, 0.74) 100%);
+  --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.72) 100%);
+  --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.56) 55%, rgba(0, 0, 0, 0.84) 100%);
 }
 
 /* --- 1. Grille responsive ------------------------------------------------ */
