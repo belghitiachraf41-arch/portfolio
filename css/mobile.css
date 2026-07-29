@@ -1,0 +1,782 @@
+/* =========================================================================
+   Achraf Belghiti - Portfolio
+   COUCHE RESPONSIVE MOBILE + MOTION DESIGN
+   Chemin : ./css/mobile.css   (chargee APRES ./css/style.css)
+   -----------------------------------------------------------------------
+   Principe : index.html porte son design en styles "inline" (c est eux qui
+   declenchent l identite liquid-glass de style.css). Cette feuille ne les
+   supprime donc pas : elle les neutralise uniquement sous 768 px, via des
+   classes dediees. La version desktop (> 768 px) reste intacte.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. Tokens mobiles
+   ------------------------------------------------------------------------- */
+:root {
+  --m-pad: 22px;              /* marge horizontale mobile */
+  --m-gap: 16px;              /* espacement entre cartes */
+  --m-radius: 18px;
+  --m-section-y: 76px;        /* padding vertical des sections */
+  --m-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --m-safe-b: env(safe-area-inset-bottom, 0px);
+  --m-safe-t: env(safe-area-inset-top, 0px);
+}
+
+/* -------------------------------------------------------------------------
+   2. Corrections globales (toutes tailles)
+   ------------------------------------------------------------------------- */
+
+/* Ancres jamais masquees par le header sticky */
+html { scroll-padding-top: 96px; }
+section[id] { scroll-margin-top: 92px; }
+
+/* Aucun debordement horizontal possible */
+html, body { max-width: 100%; overflow-x: hidden; }
+img, video, iframe { max-width: 100%; }
+
+/* Focus clavier toujours visible (zone tactile confortable) */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Lisibilite : le bloc benevolat devient bleu plein (regle liquid-glass),
+   son paragraphe doit donc rester blanc dans les deux themes. */
+.volunteer-card .volunteer-desc { color: rgba(255, 255, 255, 0.88) !important; }
+
+/* -------------------------------------------------------------------------
+   3. Systeme de reveal au defilement
+   La classe .has-reveal est posee sur <html> par script.js : sans JS ou en
+   prefers-reduced-motion, tout reste visible (aucun contenu ne disparait).
+   ------------------------------------------------------------------------- */
+html.has-reveal [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 0.55s var(--m-ease), transform 0.6s var(--m-ease);
+  transition-delay: var(--rd, 0ms);
+  will-change: opacity, transform;
+}
+html.has-reveal [data-reveal="zoom"] { transform: translate3d(0, 20px, 0) scale(0.97); }
+html.has-reveal [data-reveal="fade"] { transform: none; }
+html.has-reveal [data-reveal="lines"] { opacity: 1; transform: none; }
+html.has-reveal [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Revelation du nom, ligne par ligne */
+.hero-name .hl { display: block; overflow: hidden; padding-bottom: 0.04em; }
+.hero-name .hl > span { display: block; }
+html.has-reveal .hero-name .hl > span {
+  transform: translate3d(0, 108%, 0);
+  transition: transform 0.72s var(--m-ease);
+}
+html.has-reveal .hero-name.is-in .hl > span { transform: none; }
+html.has-reveal .hero-name.is-in .hl:nth-child(1) > span { transition-delay: 90ms; }
+html.has-reveal .hero-name.is-in .hl:nth-child(2) > span { transition-delay: 190ms; }
+
+/* Cascade du hero (60 a 120 ms entre chaque element) */
+.hero-badge   { --rd: 40ms; }
+.hero-role    { --rd: 260ms; }
+.hero-desc    { --rd: 340ms; }
+.hero-actions { --rd: 420ms; }
+.hero-media   { --rd: 500ms; }
+
+/* Compteurs de statistiques */
+.stat-value { font-variant-numeric: tabular-nums; }
+
+/* -------------------------------------------------------------------------
+   4. Menu mobile plein ecran (panneau)
+   ------------------------------------------------------------------------- */
+.mnav {
+  position: fixed;
+  inset: 0;
+  z-index: 9400;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s linear;
+}
+.mnav.is-open { visibility: visible; opacity: 1; }
+
+.mnav-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 20, 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+}
+html[data-theme="light"] .mnav-scrim { background: rgba(244, 245, 251, 0.72); }
+
+.mnav-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: calc(14px + var(--m-safe-t)) 20px calc(20px + var(--m-safe-b));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  transform: translate3d(0, -12px, 0);
+  transition: opacity 0.28s ease, transform 0.42s var(--m-ease);
+}
+.mnav.is-open .mnav-panel { opacity: 1; transform: none; }
+
+.mnav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.mnav-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.mnav-close {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text);
+  border: 1px solid var(--lg-bd);
+  border-radius: 14px;
+  background: var(--lg-fill);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+}
+.mnav-close svg { width: 18px; height: 18px; }
+
+.mnav-list { display: flex; flex-direction: column; gap: 2px; }
+.mnav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(19px, 5.2vw, 24px);
+  line-height: 1.1;
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition: opacity 0.38s ease, transform 0.42s var(--m-ease),
+              background 0.25s ease, border-color 0.25s ease;
+}
+.mnav.is-open .mnav-item { opacity: 1; transform: none; }
+.mnav.is-open .mnav-item:nth-child(1) { transition-delay: 90ms; }
+.mnav.is-open .mnav-item:nth-child(2) { transition-delay: 150ms; }
+.mnav.is-open .mnav-item:nth-child(3) { transition-delay: 210ms; }
+.mnav.is-open .mnav-item:nth-child(4) { transition-delay: 265ms; }
+.mnav.is-open .mnav-item:nth-child(5) { transition-delay: 315ms; }
+.mnav.is-open .mnav-item:nth-child(6) { transition-delay: 360ms; }
+.mnav.is-open .mnav-item:nth-child(7) { transition-delay: 400ms; }
+.mnav.is-open .mnav-item:nth-child(8) { transition-delay: 435ms; }
+.mnav-item:active,
+.mnav-item.is-active {
+  background: var(--lg-fill);
+  border-color: var(--lg-bd);
+}
+.mnav-num {
+  min-width: 24px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent-soft);
+}
+.mnav-arrow { margin-left: auto; width: 15px; height: 15px; opacity: 0.42; }
+
+.mnav-foot { margin-top: auto; padding-top: 24px; display: grid; gap: 10px; }
+.mnav-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.mnav-cta svg { width: 17px; height: 17px; }
+.mnav-cta-primary {
+  color: #ffffff;
+  background: #0314af;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 14px 34px -14px rgba(3, 20, 175, 0.8);
+}
+.mnav-cta-ghost {
+  color: var(--text);
+  border: 1px solid var(--lg-bd);
+  background: var(--lg-fill);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+}
+.mnav-social { display: flex; gap: 10px; }
+.mnav-social a {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--lg-bd);
+  border-radius: 14px;
+  background: var(--lg-fill);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+}
+
+/* Blocage du defilement sans saut de position */
+html.mnav-lock { overflow: hidden !important; }
+body.mnav-lock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden !important;
+}
+
+/* Le panneau n existe que sur mobile / tablette */
+@media (min-width: 769px) { .mnav { display: none !important; } }
+
+/* =========================================================================
+   5. COUCHE MOBILE PRINCIPALE  (<= 768 px)
+   ========================================================================= */
+@media (max-width: 768px) {
+
+  /* ---- 5.1 Header compact (64 - 72 px) ---- */
+  .site-nav {
+    top: 8px !important;
+    margin: 8px 12px 0 !important;
+    padding: 8px 10px 8px 14px !important;
+    border-radius: 18px !important;
+    min-height: 56px;
+    gap: 10px;
+    flex-wrap: nowrap !important;
+  }
+  .site-nav .nav-logo { width: 92px !important; height: 38px !important; flex: 0 0 auto; }
+  .site-nav .nav-logo img {
+    width: 165px !important;
+    height: 124px !important;
+    left: -37px !important;
+    top: -42px !important;
+  }
+
+  /* Le menu desktop est remplace par le panneau plein ecran */
+  .nav-links,
+  .nav-links.is-open { display: none !important; }
+
+  .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+  #theme-toggle {
+    margin: 0 !important;
+    min-height: 40px;
+    padding: 8px 13px !important;
+    font-size: 12.5px !important;
+  }
+  .nav-toggle {
+    display: flex !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 14px !important;
+  }
+
+  /* ---- 5.2 Hero ---- */
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    min-height: 0 !important;
+    padding: 18px var(--m-pad) 42px !important;
+  }
+  .hero-text { display: flex; flex-direction: column; animation: none !important; }
+  .hero-badge {
+    align-self: flex-start;
+    margin: 0 0 14px !important;
+    padding: 7px 14px !important;
+    font-size: 12.5px !important;
+  }
+  .hero-name {
+    font-size: clamp(3rem, 14vw, 5rem) !important;
+    line-height: 0.92 !important;
+    letter-spacing: -0.025em;
+    margin: 0 0 12px !important;
+  }
+  .hero-role {
+    font-size: clamp(17px, 4.6vw, 21px) !important;
+    line-height: 1.25 !important;
+    margin: 0 0 14px !important;
+  }
+  .hero-desc {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    max-width: 40ch !important;
+    margin: 0 0 22px !important;
+  }
+
+  /* ---- 5.3 Boutons du hero ---- */
+  .hero-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin: 0 0 26px !important;
+  }
+  .hero-actions .btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center !important;
+    gap: 8px !important;
+    min-height: 52px;
+    padding: 14px 16px !important;
+    font-size: 14.5px !important;
+    text-align: center;
+    transition: transform 0.22s var(--m-ease), box-shadow 0.25s ease;
+  }
+  .hero-actions .btn-cv { grid-column: 1 / -1; }
+  .hero-actions .btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
+
+  /* ---- 5.4 Photo du hero ---- */
+  .hero-media {
+    position: relative !important;
+    width: 100%;
+    max-width: min(100%, 420px);
+    margin: 0 auto !important;
+    animation: none !important;
+  }
+  .hero-frame {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 4 / 5 !important;
+    border-radius: 28px !important;
+    box-shadow: 0 26px 60px -28px rgba(0, 0, 0, 0.65),
+                0 0 0 1px var(--lg-bd) inset,
+                0 18px 60px -30px rgba(3, 20, 175, 0.55);
+  }
+  .hero-frame img { object-position: 50% 20% !important; }
+  .hero-tag {
+    left: 14px !important;
+    bottom: 14px !important;
+    padding: 11px 16px !important;
+    font-size: 13px !important;
+    border-radius: 14px !important;
+  }
+
+  /* ---- 5.5 Structure et espacement des sections ---- */
+  .section {
+    padding: var(--m-section-y) var(--m-pad) !important;
+  }
+  .section-grid { display: block !important; gap: 0 !important; }
+  .section-num {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11.5px !important;
+    letter-spacing: 0.16em !important;
+    margin: 0 0 20px !important;
+  }
+  .section-num::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--bd2);
+  }
+  .section-intro {
+    font-size: 14px !important;
+    max-width: 100% !important;
+    margin: 0 0 22px !important;
+  }
+
+  /* ---- 5.6 Profil : texte + statistiques en grille ---- */
+  .about-lead {
+    font-size: 17px !important;
+    line-height: 1.55 !important;
+    max-width: 100% !important;
+    margin: 0 0 22px !important;
+  }
+  .stats {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 15px 14px;
+    border: 1px solid var(--lg-bd);
+    border-radius: 16px;
+    background: var(--lg-fill);
+    -webkit-backdrop-filter: var(--lg-blur);
+    backdrop-filter: var(--lg-blur);
+    box-shadow: var(--lg-sh), var(--lg-hi);
+  }
+  .stat:last-child { grid-column: 1 / -1; }
+  .stat-ico { width: 18px; height: 18px; color: var(--accent-soft); opacity: 0.9; }
+  .stat-value { font-size: 26px !important; line-height: 1 !important; }
+  .stat-label { font-size: 12.5px !important; line-height: 1.4 !important; margin: 0 !important; }
+
+  /* ---- 5.7 Experience : timeline verticale ---- */
+  .timeline { position: relative; padding-left: 22px !important; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    bottom: 26px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--bd4), var(--bd2) 65%, transparent);
+  }
+  .tl-item {
+    display: block !important;
+    position: relative;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    padding: 0 0 18px !important;
+    border: 0 !important;
+  }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -22px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(3, 20, 175, 0.18);
+  }
+  .tl-meta {
+    font-size: 12.5px !important;
+    line-height: 1.35;
+    margin: 0 0 8px;
+  }
+  .tl-body {
+    padding: 15px 15px 14px;
+    border: 1px solid var(--lg-bd);
+    border-radius: 16px;
+    background: var(--lg-fill);
+    -webkit-backdrop-filter: var(--lg-blur);
+    backdrop-filter: var(--lg-blur);
+    box-shadow: var(--lg-sh), var(--lg-hi);
+  }
+  .tl-role { font-size: 17px !important; line-height: 1.2; margin-bottom: 4px !important; }
+  .tl-org { font-size: 13px !important; margin-bottom: 8px !important; }
+  .tl-desc { font-size: 14.5px !important; line-height: 1.55 !important; }
+
+  /* ---- 5.8 Education et certifications ---- */
+  .edu-list { gap: var(--m-gap) !important; }
+  .edu-card { padding: 16px 15px !important; border-radius: 18px !important; }
+  .edu-head { display: block !important; }
+  .edu-idn { gap: 12px !important; align-items: center; }
+  .edu-logo { height: 34px !important; }
+  .edu-title { font-size: 15.5px !important; line-height: 1.3; }
+  .edu-date { font-size: 12px !important; margin-top: 10px; }
+  .edu-desc { font-size: 14.5px !important; line-height: 1.55 !important; margin-top: 10px !important; }
+
+  /* ---- 5.9 Competences : categories + chips ---- */
+  .skill-cats { display: grid !important; grid-template-columns: 1fr !important; gap: 20px !important; }
+  .skill-title {
+    margin: 0 0 10px !important;
+    font-size: 11.5px !important;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted2);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px !important; margin: 0 !important; }
+  .chip {
+    display: inline-flex !important;
+    align-items: center;
+    min-height: 40px;
+    padding: 9px 14px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+  .skill-note { font-size: 14px !important; line-height: 1.6 !important; }
+
+  /* ---- 5.10 Creations : filtres scrollables + galerie ---- */
+  .cr-filters {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    margin: 0 calc(var(--m-pad) * -1) 20px !important;
+    padding: 2px var(--m-pad) 8px !important;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .cr-filters::-webkit-scrollbar { display: none; height: 0; }
+  .cr-filter {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-height: 40px;
+    padding: 9px 15px !important;
+    font-size: 13px !important;
+  }
+  .cr-label { font-size: 11px !important; margin-bottom: 10px !important; }
+
+  /* Videos : rangee a defilement horizontal (gain de hauteur) */
+  .cr-videos {
+    display: grid !important;
+    grid-auto-flow: column;
+    grid-auto-columns: 62%;
+    grid-template-columns: none !important;
+    gap: 12px !important;
+    margin: 0 calc(var(--m-pad) * -1) 26px !important;
+    padding: 2px var(--m-pad) 6px !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .cr-videos::-webkit-scrollbar { display: none; height: 0; }
+  .cr-videos > * { scroll-snap-align: center; }
+
+  .cr-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .cr-tile { border-radius: 16px !important; }
+
+  /* ---- 5.11 Projets : une seule colonne ---- */
+  .proj-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .proj-cover { height: clamp(200px, 54vw, 264px) !important; }
+  .proj-body { padding: 18px 16px 16px !important; }
+  .proj-title { font-size: 18px !important; }
+
+  /* ---- 5.12 Benevolat ---- */
+  .volunteer-card { padding: 20px 18px !important; border-radius: 18px !important; }
+  .volunteer-title { font-size: 17px !important; line-height: 1.25; }
+  .volunteer-desc { font-size: 14.5px !important; line-height: 1.6 !important; }
+
+  /* ---- 5.13 Contact ---- */
+  .contact { padding: 72px var(--m-pad) 64px !important; text-align: left !important; }
+  .contact-title {
+    font-size: clamp(30px, 9vw, 42px) !important;
+    line-height: 1.05 !important;
+    margin: 0 0 12px !important;
+  }
+  .contact-lead { font-size: 16px !important; line-height: 1.6; margin: 0 0 24px !important; }
+  .contact-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    justify-content: stretch !important;
+  }
+  .contact-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start !important;
+    gap: 12px;
+    width: 100%;
+    min-height: 54px;
+    padding: 14px 18px !important;
+    font-size: 15px !important;
+    text-align: left !important;
+    border-radius: 16px !important;
+    transition: transform 0.22s var(--m-ease);
+  }
+  .contact-btn svg { width: 19px; height: 19px; flex: 0 0 auto; opacity: 0.9; }
+  .contact-meta { margin-top: 26px !important; font-size: 12.5px !important; text-align: left; }
+
+  /* ---- 5.14 Pied de page ---- */
+  .site-footer {
+    flex-direction: column;
+    gap: 6px !important;
+    padding: 26px var(--m-pad) calc(30px + var(--m-safe-b)) !important;
+    font-size: 12px !important;
+  }
+
+  /* ---- 5.15 Boutons flottants : chat + retour en haut ---- */
+  .pcb-btn {
+    width: 52px !important;
+    height: 52px !important;
+    right: 14px !important;
+    bottom: calc(14px + var(--m-safe-b)) !important;
+  }
+  .pcb-panel {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: calc(78px + var(--m-safe-b)) !important;
+    max-height: min(72svh, 520px) !important;
+    height: auto !important;
+  }
+  /* Le bouton "haut de page" passe a gauche : plus aucun chevauchement */
+  .to-top {
+    left: 16px !important;
+    right: auto !important;
+    bottom: calc(16px + var(--m-safe-b)) !important;
+    width: 42px !important;
+    height: 42px !important;
+    z-index: 8990 !important;
+  }
+
+  /* ---- 5.16 Visionneuse : zones tactiles >= 44 px ---- */
+  .lb-btn { width: 44px !important; height: 44px !important; }
+  .lb-close { top: calc(12px + var(--m-safe-t)) !important; right: 12px !important; }
+  .lb-prev { left: 8px !important; margin-top: -22px !important; }
+  .lb-next { right: 8px !important; margin-top: -22px !important; }
+  .lb-stage img, .lb-stage video { max-height: 70svh !important; }
+
+  /* ---- 5.17 Garde-fous anti-debordement ---- */
+  .site { max-width: 100% !important; }
+  [style*="max-width:520px"],
+  [style*="max-width:760px"],
+  [style*="max-width:220px"] { max-width: 100% !important; }
+}
+
+/* =========================================================================
+   6. Filtres de la galerie (toutes tailles)
+   ========================================================================= */
+.cr-filter {
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease,
+              transform 0.2s var(--m-ease);
+}
+.cr-filter[aria-pressed="true"] {
+  background: linear-gradient(180deg, #0314af, #0314af) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 12px 28px -14px rgba(3, 20, 175, 0.8),
+              inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+}
+.cr-tile.is-filtered,
+.cr-block.is-filtered { display: none !important; }
+
+/* Point vert du badge : pulsation plus douce sur mobile */
+@keyframes ab-pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.55; }
+}
+
+/* =========================================================================
+   7. Affinage par breakpoint
+   ========================================================================= */
+
+/* --- Tablette et grands mobiles paysage : 481 - 768 px ------------------- */
+@media (min-width: 481px) and (max-width: 768px) {
+  :root { --m-pad: 28px; --m-section-y: 88px; }
+  .hero-actions { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .hero-actions .btn-cv { grid-column: auto; }
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .stat:last-child { grid-column: auto; }
+  .skill-cats { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .cr-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 12px !important; }
+  .cr-videos { grid-auto-columns: 40%; }
+  .contact-actions { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .contact-btn:first-child { grid-column: 1 / -1; }
+  .proj-grid { gap: 18px !important; }
+}
+
+/* --- 414 / 430 px --------------------------------------------------------- */
+@media (max-width: 430px) {
+  :root { --m-pad: 20px; }
+}
+
+/* --- Sous 390 px : boutons en colonne pleine largeur --------------------- */
+@media (max-width: 389px) {
+  .hero-actions { grid-template-columns: 1fr !important; }
+  .hero-actions .btn { width: 100%; }
+  #theme-toggle .t-label { display: none; }
+  #theme-toggle {
+    width: 44px;
+    padding: 0 !important;
+    justify-content: center;
+  }
+}
+
+/* --- 360 px --------------------------------------------------------------- */
+@media (max-width: 360px) {
+  :root { --m-pad: 18px; --m-section-y: 68px; }
+  .hero-name { font-size: clamp(2.6rem, 13.5vw, 3.2rem) !important; }
+  .cr-grid { gap: 8px !important; }
+  .mnav-item { font-size: 19px; min-height: 52px; }
+  .tl-body, .stat { padding: 14px 13px; }
+}
+
+/* --- 320 px --------------------------------------------------------------- */
+@media (max-width: 340px) {
+  :root { --m-pad: 16px; }
+  .stats { grid-template-columns: 1fr !important; }
+  .stat:last-child { grid-column: auto; }
+  .hero-frame { border-radius: 24px !important; }
+  .site-nav .nav-logo { width: 84px !important; }
+  .edu-title { font-size: 15px !important; }
+}
+
+/* =========================================================================
+   8. Appareils tactiles : retour au toucher, pas de survol fantome
+   ========================================================================= */
+@media (hover: none) {
+  .cr-tile { transition: transform 0.22s var(--m-ease); }
+  .cr-tile:active { transform: scale(0.98); }
+  .hero-actions .btn:active,
+  .contact-btn:active,
+  .mnav-cta:active,
+  .cr-filter:active,
+  .mnav-close:active { transform: scale(0.97); }
+  .lift:hover,
+  .lift-media:hover,
+  .edu-card:hover,
+  .proj-card:hover { transform: none; box-shadow: var(--lg-sh), var(--lg-hi); }
+}
+
+@media (max-width: 768px) {
+  .hero-badge > span { animation: ab-pulse-soft 2.6s ease-in-out infinite !important; }
+}
+
+/* =========================================================================
+   9. prefers-reduced-motion : tout est neutralise
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html.has-reveal [data-reveal],
+  html.has-reveal [data-reveal].is-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html.has-reveal .hero-name .hl > span {
+    transform: none !important;
+    transition: none !important;
+  }
+  .mnav, .mnav-panel, .mnav-item, .mnav-close { transition: none !important; }
+  .mnav-item { opacity: 1 !important; transform: none !important; }
+  .hero-badge > span { animation: none !important; }
+  .cr-tile,
+  .cr-filter,
+  .hero-actions .btn,
+  .contact-btn { transition: none !important; }
+}
+
+/* =========================================================================
+   10. Impression
+   ========================================================================= */
+@media print {
+  .mnav, .nav-toggle, .nav-actions, .to-top, .pcb-btn, .pcb-panel { display: none !important; }
+  html.has-reveal [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
