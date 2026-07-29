@@ -81,7 +81,9 @@
       skills: ['Branding', 'Storytelling', 'Production audiovisuelle', 'Scénario', 'Montage vidéo', 'Étalonnage', 'Marketing de contenu'],
       pdf: './documents/CHOCO%20BITES_compressed.pdf',
       pdfName: 'CHOCO BITES_compressed.pdf',
-      cover: null,
+      cover: './images/projects/choco-bites-cover.png',
+      coverAlt: 'Choco Bites branding project',
+      coverHasText: true,
       theme: {
         icon: 'video',
         tag: 'Brand & Film',
@@ -143,7 +145,9 @@
       skills: ['Brand strategy', 'Identité visuelle', 'Analyse concurrentielle', 'SWOT', 'Marketing mix', 'Buyer persona', 'UI concept', 'Expérience client', 'Stratégie digitale'],
       pdf: './documents/Lueur%20%26%20co_compressed.pdf',
       pdfName: 'Lueur & co_compressed.pdf',
-      cover: null,
+      cover: './images/projects/lueur-co-cover.png',
+      coverAlt: 'Lueur & Co candle branding project',
+      coverHasText: true,
       theme: {
         icon: 'flame',
         tag: 'Brand & Strategy',
@@ -206,7 +210,9 @@
       skills: ['UX/UI', 'Application mobile', 'Branding', 'Benchmark', 'Stratégie digitale', 'Content marketing', 'Publicité digitale', 'E-mailing', 'SEO', 'KPI', 'Fidélisation'],
       pdf: './documents/projet%20MOODTRIP_compressed%20(1).pdf',
       pdfName: 'projet MOODTRIP_compressed (1).pdf',
-      cover: null,
+      cover: './images/projects/moodtrip-cover.png',
+      coverAlt: 'MoodTrip travel application project',
+      coverHasText: true,
       theme: {
         icon: 'compass',
         tag: 'App & Digital',
@@ -267,7 +273,9 @@
       skills: ['Branding', 'Identité visuelle', 'Packaging', 'Direction artistique', 'Buyer persona', 'Positionnement', 'Storytelling de marque', 'Design graphique'],
       pdf: './documents/Aphrodite_compressed.pdf',
       pdfName: 'Aphrodite_compressed.pdf',
-      cover: null,
+      cover: './images/projects/aphrodite-cover.png',
+      coverAlt: 'Aphrodite luxury candle branding project',
+      coverHasText: true,
       theme: {
         icon: 'sparkle',
         tag: 'Premium Brand',
@@ -330,19 +338,31 @@
     return ICONS[name] || ICONS.sparkle;
   }
 
-  /* Visuel de couverture : image du portfolio si disponible, sinon
-     emplacement propre genere avec les couleurs de la marque + une icone. */
+  /* Visuel de couverture du projet.
+     - Si le projet possede une image (champ "cover"), elle remplit toute la
+       zone en object-fit: cover ; le degrade de la marque reste dessous et
+       sert de secours si l'image ne se charge pas (aucun lien casse).
+     - Si l'image contient deja l'icone, le titre et la categorie incrustes
+       (coverHasText: true), on n'ajoute pas le texte HTML par-dessus pour
+       eviter un doublon. Le titre reste present dans le corps de la carte. */
   function coverHtml(p, titleClass) {
     var theme = p.theme || {};
     var html = '<span class="proj-cover-art" style="background-image:' + esc(theme.gradient) + ';"></span>';
+
     if (p.cover) {
-      html += '<img class="proj-cover-img" src="' + esc(p.cover) + '" alt="" loading="lazy" decoding="async">';
+      html += '<img class="proj-cover-img" src="' + esc(p.cover) + '"'
+           +  ' alt="' + esc(p.coverAlt || p.title) + '"'
+           +  ' width="763" height="502" loading="lazy" decoding="async">';
     }
-    html += '<span class="proj-cover-inner">'
-         +    '<span class="proj-cover-icon">' + icon(theme.icon) + '</span>'
-         +    '<span class="' + titleClass + '">' + esc(p.title) + '</span>'
-         +    '<span class="proj-cover-tag">' + esc(theme.tag || '') + '</span>'
-         +  '</span>';
+
+    if (!p.cover || !p.coverHasText) {
+      html += '<span class="proj-cover-inner">'
+           +    '<span class="proj-cover-icon">' + icon(theme.icon) + '</span>'
+           +    '<span class="' + titleClass + '">' + esc(p.title) + '</span>'
+           +    '<span class="proj-cover-tag">' + esc(theme.tag || '') + '</span>'
+           +  '</span>';
+    }
+
     return html;
   }
 
@@ -353,7 +373,7 @@
   function cardHtml(p, index) {
     return '<article class="proj-card lift" data-proj-id="' + esc(p.id) + '" data-index="' + index + '"'
          +   (REDUCE ? '' : ' data-reveal=""') + '>'
-         +   '<div class="proj-cover" aria-hidden="true">' + coverHtml(p, 'proj-cover-title') + '</div>'
+         +   '<div class="proj-cover">' + coverHtml(p, 'proj-cover-title') + '</div>'
          +   '<div class="proj-body">'
          +     '<span class="proj-kicker">' + esc(p.categoryShort) + '</span>'
          +     '<h3 class="proj-title">' + esc(p.title) + '</h3>'
@@ -434,7 +454,8 @@
 
     bannerEl.innerHTML =
         '<span class="proj-cover-art" style="background-image:' + esc(theme.gradient) + ';"></span>'
-      + (p.cover ? '<img class="proj-cover-img" src="' + esc(p.cover) + '" alt="" decoding="async">' : '')
+      + (p.cover ? '<img class="proj-cover-img proj-banner-img" src="' + esc(p.cover) + '"'
+                  + ' alt="' + esc(p.coverAlt || p.title) + '" decoding="async">' : '')
       + '<div class="proj-modal-banner-inner">'
       +   '<span class="proj-cover-icon">' + icon(theme.icon) + '</span>'
       +   '<h3 class="proj-modal-title" id="proj-modal-title">' + esc(p.title) + '</h3>'
@@ -570,6 +591,16 @@
       html += cardHtml(projects[i], i);
     }
     grid.innerHTML = html;
+
+    // Secours si une image de couverture manque : on masque l'image et le
+    // degrade de la marque reprend sa place (aucune image cassee affichee).
+    var covers = grid.querySelectorAll('.proj-cover-img');
+    for (var c = 0; c < covers.length; c++) {
+      covers[c].addEventListener('error', function () { this.classList.add('is-missing'); });
+      if (covers[c].complete && covers[c].naturalWidth === 0) {
+        covers[c].classList.add('is-missing');
+      }
+    }
 
     grid.addEventListener('click', function (event) {
       var target = event.target;
