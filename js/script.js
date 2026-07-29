@@ -24,6 +24,7 @@
   var body = document.body;
   var THEME_KEY = "ab-theme";
   var MOBILE_MAX = 768;
+  var galleryRefresh = null;
 
   function safe(fn) {
     try { fn(); } catch (err) { /* aucune erreur ne doit bloquer la page */ }
@@ -46,7 +47,7 @@
     if (btn) {
       btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
       btn.setAttribute("aria-label", theme === "dark"
-        ? "Activer le theme clair" : "Activer le theme sombre");
+        ? "Activer le thème clair" : "Activer le thème sombre");
     }
   }
 
@@ -335,6 +336,9 @@
         btn.setAttribute("aria-pressed",
           btn.getAttribute("data-filter") === cat ? "true" : "false");
       });
+
+      /* la galerie progressive doit se recalculer apres chaque filtre */
+      if (galleryRefresh) { galleryRefresh(); }
     }
 
     each(buttons, function (btn) {
@@ -356,14 +360,14 @@
     box.className = "img-fallback";
     box.setAttribute("role", "img");
     box.setAttribute("aria-label", img.getAttribute("alt") || "Image indisponible");
-    box.textContent = "Image a ajouter : " + (img.getAttribute("src") || "");
+    box.textContent = "Image à ajouter : " + (img.getAttribute("src") || "");
     if (img.parentNode) { img.parentNode.replaceChild(box, img); }
   }
 
   function initImages() {
     each(document.querySelectorAll("img"), function (img, index) {
       if (!img.getAttribute("alt")) {
-        img.setAttribute("alt", "Visuel du portfolio d Achraf Belghiti");
+        img.setAttribute("alt", "Visuel du portfolio d'Achraf Belghiti");
       }
       if (!img.getAttribute("decoding")) { img.setAttribute("decoding", "async"); }
       if (index > 1 && !img.getAttribute("loading")) { img.setAttribute("loading", "lazy"); }
@@ -561,6 +565,54 @@
   }
 
   /* =====================================================================
+     13. Galerie Creations : affichage progressif sur mobile
+     Sur petit ecran la galerie complete rendrait la page tres longue :
+     on affiche les 8 premiers visuels puis un bouton "Voir plus".
+     Aucun contenu n est supprime, il est simplement replie.
+     ===================================================================== */
+  function initGalleryMore() {
+    var grid = document.querySelector(".cr-grid");
+    if (!grid) { return; }
+    var LIMIT = 8;
+    var expanded = false;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "cr-more";
+    grid.parentNode.insertBefore(btn, grid.nextSibling);
+
+    function apply() {
+      var tiles = grid.querySelectorAll(".cr-tile");
+      if (expanded || !mq("(max-width: " + MOBILE_MAX + "px)")) {
+        each(tiles, function (t) { t.classList.remove("is-clamped"); });
+        btn.hidden = true;
+        return;
+      }
+      var shown = 0;
+      var hidden = 0;
+      each(tiles, function (t) {
+        if (t.classList.contains("is-filtered")) {
+          t.classList.remove("is-clamped");
+          return;
+        }
+        shown++;
+        if (shown > LIMIT) { t.classList.add("is-clamped"); hidden++; }
+        else { t.classList.remove("is-clamped"); }
+      });
+      btn.hidden = (hidden === 0);
+      btn.textContent = "Voir plus de créations (" + hidden + ")";
+    }
+
+    btn.addEventListener("click", function () {
+      expanded = true;
+      apply();
+    });
+    window.addEventListener("resize", apply);
+    galleryRefresh = apply;
+    apply();
+  }
+
+  /* =====================================================================
      Initialisation
      ===================================================================== */
   function init() {
@@ -570,6 +622,7 @@
     safe(initSmoothScroll);
     safe(initActiveLink);
     safe(initFilters);
+    safe(initGalleryMore);
     safe(initReveal);
     safe(initCounters);
     safe(initImages);
