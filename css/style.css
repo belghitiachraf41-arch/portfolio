@@ -905,7 +905,7 @@ html[data-theme="light"] {
   align-items: stretch;
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1800px) {
   .proj-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
@@ -1102,6 +1102,8 @@ html[data-theme="light"] {
   outline-offset: 4px;
   border-radius: 6px;
 }
+
+.proj-open span { white-space: nowrap; }
 
 .proj-arrow {
   width: 15px;
