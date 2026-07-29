@@ -97,7 +97,7 @@
 
   function captionOf(el, isVideo, i) {
     var t = el.getAttribute('alt') || el.getAttribute('title') || el.getAttribute('aria-label') || '';
-    if (!t && isVideo) { t = 'Video ' + i; }
+    if (!t && isVideo) { t = 'Vidéo ' + i; }
     return String(t).replace(/\s+/g, ' ').trim();
   }
 
@@ -140,7 +140,7 @@
           btn.type = 'button';
           btn.className = 'lb-expand';
           btn.innerHTML = ICON_EXPAND + '<span>Agrandir</span>';
-          btn.setAttribute('aria-label', 'Agrandir la video');
+          btn.setAttribute('aria-label', 'Agrandir la vidéo');
           btn.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -188,7 +188,7 @@
     overlay.setAttribute('aria-label', 'Visionneuse');
     overlay.innerHTML =
       '<button type="button" class="lb-btn lb-close" aria-label="Fermer">' + ICON_CLOSE + '</button>' +
-      '<button type="button" class="lb-btn lb-prev" aria-label="Precedent">' + ICON_PREV + '</button>' +
+      '<button type="button" class="lb-btn lb-prev" aria-label="Précédent">' + ICON_PREV + '</button>' +
       '<button type="button" class="lb-btn lb-next" aria-label="Suivant">' + ICON_NEXT + '</button>' +
       '<figure class="lb-fig">' +
         '<div class="lb-stage"></div>' +
