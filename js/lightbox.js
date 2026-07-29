@@ -249,7 +249,11 @@
     }
     stage.appendChild(node);
     capEl.textContent = it.caption;
-    countEl.textContent = (index + 1) + ' / ' + items.length;
+    var shown = shownItems();
+    var pos = shown.indexOf(it);
+    countEl.textContent = pos >= 0
+      ? (pos + 1) + ' / ' + shown.length
+      : (index + 1) + ' / ' + items.length;
 
     /* prechargement des voisins */
     [items[index + 1], items[index - 1]].forEach(function (n) {
@@ -257,8 +261,28 @@
     });
   }
 
+  /* un element masque par un filtre de la galerie ne doit pas etre affiche */
+  function isShown(it) {
+    var el = it && it.el;
+    if (!el) { return false; }
+    var tile = el.parentElement;
+    if (tile && tile.classList && tile.classList.contains('is-filtered')) { return false; }
+    var block = el.closest ? el.closest('.cr-block') : null;
+    if (block && block.classList.contains('is-filtered')) { return false; }
+    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  }
+
+  function shownItems() {
+    return items.filter(isShown);
+  }
+
   function step(dir) {
     if (!items.length) { return; }
+    var i = index;
+    for (var n = 0; n < items.length; n++) {
+      i = (i + dir + items.length) % items.length;
+      if (isShown(items[i])) { index = i; render(); return; }
+    }
     index = (index + dir + items.length) % items.length;
     render();
   }
