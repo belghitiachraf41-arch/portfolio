@@ -16,6 +16,8 @@
     video:   SVG_HEAD + '<rect x="2.6" y="5.6" width="12.8" height="12.8" rx="3"/><path d="M15.4 10.4 21 7.4v9.2l-5.6-3z"/></svg>',
     flame:   SVG_HEAD + '<path d="M12 2.8c3 3.1 4.8 5.7 4.8 8.4a4.8 4.8 0 0 1-9.6 0c0-2.7 1.8-5.3 4.8-8.4z"/><circle cx="12" cy="13.4" r="2"/></svg>',
     compass: SVG_HEAD + '<circle cx="12" cy="12" r="8.8"/><path d="M15.4 8.6l-2.1 4.7-4.7 2.1 2.1-4.7z"/></svg>',
+    plane:   SVG_HEAD + '<path d="M21.4 3.6 3.1 10.3l6.2 2.4 2.4 6.2z"/><path d="M21.4 3.6 9.3 12.7"/></svg>',
+    column:  SVG_HEAD + '<path d="M4.4 6.1h15.2"/><path d="M6.8 6.1v11.8"/><path d="M12 6.1v11.8"/><path d="M17.2 6.1v11.8"/><path d="M3.4 17.9h17.2"/></svg>',
     sparkle: SVG_HEAD + '<path d="M12 2.9l1.9 5.2 5.2 1.9-5.2 1.9-1.9 5.2-1.9-5.2-5.2-1.9 5.2-1.9z"/><path d="M18.5 17.6l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z"/></svg>',
     arrow:   '<svg class="proj-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>',
     ext:     '<svg class="proj-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-8.6 8.6"/><path d="M18 14.4V19a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V7.5A1.5 1.5 0 0 1 5 6h4.6"/></svg>',
@@ -214,8 +216,8 @@
       coverAlt: 'MoodTrip travel application project',
       coverHasText: true,
       theme: {
-        icon: 'compass',
-        tag: 'App & Digital',
+        icon: 'plane',
+        tag: 'App & Marketing',
         gradient: 'linear-gradient(135deg,#1c1560 0%,#5b4be1 55%,#ffd24c 100%)'
       }
     },
@@ -277,8 +279,8 @@
       coverAlt: 'Aphrodite luxury candle branding project',
       coverHasText: true,
       theme: {
-        icon: 'sparkle',
-        tag: 'Premium Brand',
+        icon: 'column',
+        tag: 'Branding & Packaging',
         gradient: 'linear-gradient(135deg,#0d2a20 0%,#1e4b39 50%,#c9a227 100%)'
       }
     }
