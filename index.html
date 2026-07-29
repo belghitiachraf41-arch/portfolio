@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/mobile.css">
   <script>try{document.documentElement.setAttribute('data-theme', localStorage.getItem('ab-theme')||'light');}catch(e){}</script>
 
   <meta name="author" content="Achraf Belghiti">
@@ -23,7 +24,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://belghitiachraf41-arch.github.io/portfolio/">
   <link rel="apple-touch-icon" href="./images/favicon.svg">
-<noscript><style>.nav-links{display:flex!important;flex-wrap:wrap}.nav-toggle{display:none!important}.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>.nav-links{display:flex!important;flex-wrap:wrap}.nav-toggle{display:none!important}.reveal,[data-reveal]{opacity:1!important;transform:none!important}.mnav{display:none!important}</style></noscript>
 </head>
 <body>
 
@@ -31,81 +32,87 @@
 <div class="site" style="background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; min-height:768px; max-width:1366px; width:100%; overflow-x:hidden; margin:0 auto; transition:background 0.35s ease, color 0.35s ease;">
 
   <!-- NAV -->
-  <nav style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 6vw; background:var(--nav-bg); backdrop-filter:blur(10px); border-bottom:1px solid var(--bd1);">
+  <nav class="site-nav" style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 6vw; background:var(--nav-bg); backdrop-filter:blur(10px); border-bottom:1px solid var(--bd1);">
     <span class="nav-logo" style="display:block; width:120px; height:48px; overflow:hidden; position:relative;"><img src="./images/logos/ash-logo-white.png" alt="ASH logo" style="position:absolute; width:215px; height:161px; left:-48px; top:-54px; max-width:none;" decoding="async" loading="eager" fetchpriority="high"></span>
-    <div style="display:flex; gap:32px; font-size:14px; color:var(--muted);" id="nav-links" class="nav-links">
-      <a href="#about" style="color:inherit; text-decoration:none;">About</a>
-      <a href="#experience" style="color:inherit; text-decoration:none;">Experience</a>
-      <a href="#skills" style="color:inherit; text-decoration:none;">Skills</a>
+    <div style="display:flex; gap:32px; font-size:14px; color:var(--muted); margin-left:auto;" id="nav-links" class="nav-links">
+      <a href="#about" style="color:inherit; text-decoration:none;">Profil</a>
+      <a href="#experience" style="color:inherit; text-decoration:none;">Expérience</a>
+      <a href="#skills" style="color:inherit; text-decoration:none;">Compétences</a>
       <a href="#creations" style="color:inherit; text-decoration:none;">Créations</a>
       <a href="#projects" style="color:inherit; text-decoration:none;">Projets</a>
       <a href="#contact" style="color:inherit; text-decoration:none;">Contact</a>
       <a href="https://www.instagram.com/madebyashraf/" target="_blank" style="color:var(--accent-soft); text-decoration:none;" rel="noopener noreferrer">Instagram</a>
-      <button id="theme-toggle" aria-label="Basculer le thème" style="display:inline-flex; align-items:center; background:transparent; color:var(--text); border:1px solid var(--bd3); border-radius:999px; padding:7px 14px; font-size:13px; font-family:inherit; cursor:pointer; line-height:1;">
-        <span class="t-moon">🌙 Sombre</span><span class="t-sun">☀️ Clair</span>
-      </button>
-    </div>
+      </div>
+
+<div class="nav-actions" style="display:flex; align-items:center; gap:12px;">
+<button id="theme-toggle" type="button" aria-label="Basculer le thème" style="display:inline-flex; align-items:center; background:transparent; color:var(--text); border:1px solid var(--bd3); border-radius:999px; padding:7px 14px; font-size:13px; font-family:inherit; cursor:pointer; line-height:1;">
+<span class="t-moon">🌙<span class="t-label"> Sombre</span></span><span class="t-sun">☀️<span class="t-label"> Clair</span></span>
+</button>
   
-      <button id="nav-toggle" class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="nav-links" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div>
     </nav>
 
   <!-- HERO -->
-  <section data-screen-label="Hero" style="display:grid; grid-template-columns: 1.1fr 0.9fr; align-items:center; gap:40px; padding:80px 6vw 100px; min-height:82vh;">
-    <div style="animation:fadeUp 0.7s ease both;">
-      <div class="badge-open" style="display:inline-flex; align-items:center; gap:10px; padding:8px 16px; border:1px solid rgba(34,197,94,0.55); border-radius:999px; font-size:13px; color:#4ade80; margin-bottom:28px;">
+  <section class="hero" data-screen-label="Hero" style="display:grid; grid-template-columns: 1.1fr 0.9fr; align-items:center; gap:40px; padding:80px 6vw 100px; min-height:82vh;">
+    <div class="hero-text" style="animation:fadeUp 0.7s ease both;">
+      <div class="badge-open hero-badge" data-reveal style="display:inline-flex; align-items:center; gap:10px; padding:8px 16px; border:1px solid rgba(34,197,94,0.55); border-radius:999px; font-size:13px; color:#4ade80; margin-bottom:28px;">
         <span style="width:7px; height:7px; border-radius:50%; background:#22c55e; display:inline-block;"></span>
         Ouvert aux opportunités
       </div>
-      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(40px,6vw,88px); line-height:1.02; margin:0 0 20px;">
-        Achraf<br>Belghiti.
+      <h1 class="hero-name" data-reveal="lines" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(40px,6vw,88px); line-height:1.02; margin:0 0 20px;">
+        <span class="hl"><span>Achraf</span></span><span class="hl"><span>Belghiti.</span></span>
       </h1>
-      <p style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(18px,2.4vw,28px); color:var(--accent-soft); margin:0 0 20px;">
+      <p class="hero-role" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(18px,2.4vw,28px); color:var(--accent-soft); margin:0 0 20px;">
         Marketing Digital &amp; Développement Commercial
       </p>
-      <p style="font-size:17px; line-height:1.7; color:var(--muted); max-width:520px; margin:0 0 36px;">
+      <p class="hero-desc" data-reveal style="font-size:17px; line-height:1.7; color:var(--muted); max-width:520px; margin:0 0 36px;">
         Junior en marketing digital et développement commercial, avec expérience en vente et relation client. À l'aise avec les outils CRM, WordPress/CMS et Canva — motivé par la conversion et la croissance commerciale via des solutions numériques concrètes.
       </p>
-      <div style="display:flex; gap:16px; flex-wrap:wrap;">
-        <a href="#experience" style="display:inline-flex; align-items:center; gap:10px; background:#0314af; color:#ffffff; font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none;">
-          Mon parcours ↓
+      <div class="hero-actions" data-reveal style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="#experience" style="display:inline-flex; align-items:center; gap:10px; background:#0314af; color:#ffffff; font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none;">
+          <span>Mon parcours</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg>
         </a>
-        <a href="#contact" style="display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none; border:1px solid var(--bd4);">
-          Me contacter
+        <a class="btn btn-ghost" href="#contact" style="display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none; border:1px solid var(--bd4);">
+          <span>Me contacter</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>
         </a>
-          <a href="./documents/Achraf_Belghiti_Resume%20(1)%20(2).pdf.pdf" download="CV-Achraf-Belghiti.pdf" style="display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none; border:1px solid var(--bd4);">Voir mon CV</a>
+          <a class="btn btn-ghost btn-cv" href="./documents/Achraf_Belghiti_Resume%20(1)%20(2).pdf.pdf" download="CV-Achraf-Belghiti.pdf" style="display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--text); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; text-decoration:none; border:1px solid var(--bd4);"><span>Voir mon CV</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v10m0 0l-4-4m4 4l4-4M5 18.5h14"/></svg></a>
       </div>
     </div>
 
-    <div style="position:relative; animation:fadeUp 0.9s ease 0.1s both;">
-      <div style="aspect-ratio: 4/5; border-radius: 24px; border: 1px solid var(--bd1); position: relative; overflow: hidden">
-        <img src="./images/portrait/portrait.jpg" alt="Achraf Belghiti" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="eager" fetchpriority="high">
+    <div class="hero-media" data-reveal="zoom" style="position:relative; animation:fadeUp 0.9s ease 0.1s both;">
+      <div class="hero-frame" style="aspect-ratio: 4/5; border-radius: 24px; border: 1px solid var(--bd1); position: relative; overflow: hidden">
+        <img src="./images/portrait/portrait.jpg" alt="Achraf Belghiti" width="900" height="1125" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="eager" fetchpriority="high">
       </div>
-      <div style="position:absolute; bottom:-18px; left:-18px; background:#0314af; color:#ffffff; padding:16px 22px; border-radius:16px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+      <div class="hero-tag lift" style="position:absolute; bottom:-18px; left:-18px; background:#0314af; color:#ffffff; padding:16px 22px; border-radius:16px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
         Rabat, Maroc
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" data-screen-label="About" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
-      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">01 — Profil</h2>
+  <section id="about" class="section" data-screen-label="About" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
+    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
+      <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">01 — Profil</h2>
       <div>
-        <p style="font-size:22px; line-height:1.6; color:var(--text); max-width:760px; margin:0 0 40px; font-weight:400;">
+        <p class="about-lead" data-reveal style="font-size:22px; line-height:1.6; color:var(--text); max-width:760px; margin:0 0 40px; font-weight:400;">
           Expérience en vente et relation client chez Wafacash et Marjane : conseil de nombreux clients au quotidien et contribution directe aux ventes. Passionné par la manière dont les outils numériques transforment la relation commerciale.
         </p>
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; color:var(--accent-soft);">3+</div>
-            <div style="font-size:14px; color:var(--muted); margin-top:6px;">expériences terrain en vente &amp; conseil client</div>
+        <div class="stats" data-stagger style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+          <div class="stat" data-reveal>
+            <svg class="stat-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7.5" width="18" height="12" rx="2.5"/><path d="M9 7.5V6a2 2 0 012-2h2a2 2 0 012 2v1.5M3 12.5h18"/></svg>
+            <div class="stat-value" data-count="3" data-suffix="+" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; color:var(--accent-soft);">3+</div>
+            <div class="stat-label" style="font-size:14px; color:var(--muted); margin-top:6px;">expériences terrain en vente &amp; conseil client</div>
           </div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; color:var(--accent-soft);">3</div>
-            <div style="font-size:14px; color:var(--muted); margin-top:6px;">langues parlées</div>
+          <div class="stat" data-reveal>
+            <svg class="stat-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/></svg>
+            <div class="stat-value" data-count="3" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; color:var(--accent-soft);">3</div>
+            <div class="stat-label" style="font-size:14px; color:var(--muted); margin-top:6px;">langues parlées</div>
           </div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; color:var(--accent-soft);">2026</div>
-            <div style="font-size:14px; color:var(--muted); margin-top:6px;">Licence Marketing Digital, ISMAGI</div>
+          <div class="stat" data-reveal>
+            <svg class="stat-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5L12 5.5l8.5 4-8.5 4z"/><path d="M7 12v4.2c0 1.3 2.2 2.3 5 2.3s5-1 5-2.3V12"/></svg>
+            <div class="stat-value" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; color:var(--accent-soft);">2026</div>
+            <div class="stat-label" style="font-size:14px; color:var(--muted); margin-top:6px;">Licence Marketing Digital, ISMAGI</div>
           </div>
         </div>
       </div>
@@ -113,44 +120,44 @@
   </section>
 
   <!-- EXPERIENCE -->
-  <section id="experience" data-screen-label="Experience" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
-      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">02 — Expérience</h2>
-      <div style="display:flex; flex-direction:column;">
+  <section id="experience" class="section" data-screen-label="Experience" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
+    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
+      <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">02 — Expérience</h2>
+      <div class="timeline" data-stagger style="display:flex; flex-direction:column;">
 
-        <div style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2);">
-          <div style="font-size:14px; color:var(--muted2);">Mars 2024 — Juillet 2024<br>Rabat</div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Agent commercial</div>
-            <div style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Wafacash</div>
-            <div style="font-size:15px; color:var(--muted); line-height:1.6;">Traitement des opérations de transfert d'argent et paiement de factures.</div>
+        <div class="tl-item" data-reveal style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2);">
+          <div class="tl-meta" style="font-size:14px; color:var(--muted2);">Mars 2024 — Juillet 2024<br>Rabat</div>
+          <div class="tl-body">
+            <div class="tl-role" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Agent commercial</div>
+            <div class="tl-org" style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Wafacash</div>
+            <div class="tl-desc" style="font-size:15px; color:var(--muted); line-height:1.6;">Traitement des opérations de transfert d'argent et paiement de factures.</div>
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2);">
-          <div style="font-size:14px; color:var(--muted2);">Nov 2024 — Déc 2024<br>Rabat</div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Stagiaire en rayon de textile</div>
-            <div style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Marjane</div>
-            <div style="font-size:15px; color:var(--muted); line-height:1.6;">Accueil et orientation des clients. Conseil dans le choix des produits textiles.</div>
+        <div class="tl-item" data-reveal style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2);">
+          <div class="tl-meta" style="font-size:14px; color:var(--muted2);">Nov 2024 — Déc 2024<br>Rabat</div>
+          <div class="tl-body">
+            <div class="tl-role" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Stagiaire en rayon de textile</div>
+            <div class="tl-org" style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Marjane</div>
+            <div class="tl-desc" style="font-size:15px; color:var(--muted); line-height:1.6;">Accueil et orientation des clients. Conseil dans le choix des produits textiles.</div>
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2);">
-          <div style="font-size:14px; color:var(--muted2);">Juillet 2023 — Sept 2023<br>Rabat</div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Conseiller en Vente</div>
-            <div style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Pneu Bne Touzine</div>
-            <div style="font-size:15px; color:var(--muted); line-height:1.6;">Accueil et conseil des clients sur les produits et services.</div>
+        <div class="tl-item" data-reveal style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2);">
+          <div class="tl-meta" style="font-size:14px; color:var(--muted2);">Juillet 2023 — Sept 2023<br>Rabat</div>
+          <div class="tl-body">
+            <div class="tl-role" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Conseiller en Vente</div>
+            <div class="tl-org" style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Pneu Bne Touzine</div>
+            <div class="tl-desc" style="font-size:15px; color:var(--muted); line-height:1.6;">Accueil et conseil des clients sur les produits et services.</div>
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2); border-bottom:1px solid var(--bd2);">
-          <div style="font-size:14px; color:var(--muted2);">Août 2022 — Sept 2022<br>Rabat</div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Vendeur</div>
-            <div style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Téléphones &amp; appareils électroniques</div>
-            <div style="font-size:15px; color:var(--muted); line-height:1.6;">Conseil personnalisé selon les besoins et le budget des clients. Vente de téléphones.</div>
+        <div class="tl-item" data-reveal style="display:grid; grid-template-columns: 200px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--bd2); border-bottom:1px solid var(--bd2);">
+          <div class="tl-meta" style="font-size:14px; color:var(--muted2);">Août 2022 — Sept 2022<br>Rabat</div>
+          <div class="tl-body">
+            <div class="tl-role" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:20px; margin-bottom:6px;">Vendeur</div>
+            <div class="tl-org" style="font-size:14px; color:var(--accent-soft); margin-bottom:10px;">Téléphones &amp; appareils électroniques</div>
+            <div class="tl-desc" style="font-size:15px; color:var(--muted); line-height:1.6;">Conseil personnalisé selon les besoins et le budget des clients. Vente de téléphones.</div>
           </div>
         </div>
 
@@ -159,185 +166,219 @@
   </section>
 
   <!-- EDUCATION -->
-  <section id="education" data-screen-label="Education" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
-      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">03 — Éducation</h2>
-      <div style="display:grid; gap:20px;">
+  <section id="education" class="section" data-screen-label="Education" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
+    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
+      <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">03 — Éducation</h2>
+      <div class="edu-list" data-stagger style="display:grid; gap:20px;">
 
-        <div class="edu-card" style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
-          <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
-            <div style="display:flex; align-items:center; gap:14px;">
-              <img src="./images/logos/ismagi-logo.png" alt="Logo ISMAGI" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy">
-              <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">ISMAGI</div>
+        <div class="edu-card lift" data-reveal style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
+          <div class="edu-head" style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
+            <div class="edu-idn" style="display:flex; align-items:center; gap:14px;">
+              <img src="./images/logos/ismagi-logo.png" alt="Logo ISMAGI" class="edu-logo" width="88" height="88" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy">
+              <div class="edu-title" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">ISMAGI</div>
             </div>
-            <div style="font-size:13px; color:var(--muted2);">2025 — 2026 · Rabat</div>
+            <div class="edu-date" style="font-size:13px; color:var(--muted2);">2025 — 2026 · Rabat</div>
           </div>
-          <div style="font-size:15px; color:var(--muted); margin-top:8px;">Licence en Marketing Digital &amp; Développement commercial — focus sur les stratégies commerciales et le marketing digital.</div>
+          <div class="edu-desc" style="font-size:15px; color:var(--muted); margin-top:8px;">Licence en Marketing Digital &amp; Développement commercial — focus sur les stratégies commerciales et le marketing digital.</div>
         </div>
 
-        <div class="edu-card" style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
-          <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
-            <div style="display:flex; align-items:center; gap:14px;">
-              <img src="./images/logos/ofppt-logo-sm.png" alt="Logo OFPPT" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy">
-              <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">Institut Spécialisé de Technologie Appliquée Hay Riad</div>
+        <div class="edu-card lift" data-reveal style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
+          <div class="edu-head" style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
+            <div class="edu-idn" style="display:flex; align-items:center; gap:14px;">
+              <img src="./images/logos/ofppt-logo-sm.png" alt="Logo OFPPT" class="edu-logo" width="88" height="88" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy">
+              <div class="edu-title" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">Institut Spécialisé de Technologie Appliquée Hay Riad</div>
             </div>
-            <div style="font-size:13px; color:var(--muted2);">2022 — 2025 · Rabat</div>
+            <div class="edu-date" style="font-size:13px; color:var(--muted2);">2022 — 2025 · Rabat</div>
           </div>
-          <div style="font-size:15px; color:var(--muted); margin-top:8px;">Diplôme en Gestion des Entreprises, option Commerce et Marketing — spécialisation en stratégies commerciales et marketing.</div>
+          <div class="edu-desc" style="font-size:15px; color:var(--muted); margin-top:8px;">Diplôme en Gestion des Entreprises, option Commerce et Marketing — spécialisation en stratégies commerciales et marketing.</div>
         </div>
 
-        <div style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
-          <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">Lycée Houman Fatwaki</div>
-            <div style="font-size:13px; color:var(--muted2);">2021 — 2022 · Rabat</div>
+        <div class="edu-card lift" data-reveal style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;">
+          <div class="edu-head" style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
+            <div class="edu-title" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;">Lycée Houman Fatwaki</div>
+            <div class="edu-date" style="font-size:13px; color:var(--muted2);">2021 — 2022 · Rabat</div>
           </div>
-          <div style="font-size:15px; color:var(--muted); margin-top:8px;">Baccalauréat — gestion comptable et principes économiques fondamentaux.</div>
+          <div class="edu-desc" style="font-size:15px; color:var(--muted); margin-top:8px;">Baccalauréat — gestion comptable et principes économiques fondamentaux.</div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- LICENSES & CERTIFICATIONS --><section id="certifications" data-screen-label="Certifications" style="padding:100px 6vw; border-top:1px solid var(--bd1);"><div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;"><h2 style="font-family:Space Grotesk,sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">04 &mdash; Licences &amp; certifications</h2><div style="display:grid; gap:20px;"><div class="edu-card" style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;"><div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;"><div style="display:flex; align-items:center; gap:14px;"><img src="./images/logos/ismagi-logo.png" alt="Logo ISMAGI" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy"><div style="font-family:Space Grotesk,sans-serif; font-weight:600; font-size:18px;">Attestation d&rsquo;excellence &mdash; Programme Business Dunkin &amp; ISMAGI</div></div><div style="font-size:13px; color:var(--muted2);">D&eacute;livr&eacute;e en avril 2026</div></div><div style="font-size:15px; color:var(--muted); margin-top:8px;">ISMAGI, Rabat</div></div><div class="edu-card" style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;"><div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;"><div style="display:flex; align-items:center; gap:14px;"><img src="./images/logos/ofppt-logo-sm.png" alt="Logo OFPPT" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy"><div style="font-family:Space Grotesk,sans-serif; font-weight:600; font-size:18px;">Programme d&rsquo;Innovation Entrepreneuriale : de l&rsquo;id&eacute;e au projet viable</div></div><div style="font-size:13px; color:var(--muted2);">D&eacute;livr&eacute;e en mars 2024 &middot; Expir&eacute;e en juillet 2024</div></div><div style="font-size:15px; color:var(--muted); margin-top:8px;">Institut Sp&eacute;cialis&eacute; de Technologie Appliqu&eacute;e Hay Riad, Rabat</div></div></div></div></section><!-- SKILLS -->
-  <section id="skills" data-screen-label="Skills" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
-      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">05 — Compétences</h2>
+  <!-- LICENSES & CERTIFICATIONS --><section id="certifications" class="section" data-screen-label="Certifications" style="padding:100px 6vw; border-top:1px solid var(--bd1);"><div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;"><h2 class="section-num" data-reveal style="font-family:Space Grotesk,sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">04 &mdash; Licences &amp; certifications</h2><div class="edu-list" data-stagger style="display:grid; gap:20px;"><div class="edu-card lift" data-reveal style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;"><div class="edu-head" style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;"><div class="edu-idn" style="display:flex; align-items:center; gap:14px;"><img src="./images/logos/ismagi-logo.png" alt="Logo ISMAGI" class="edu-logo" width="88" height="88" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy"><div class="edu-title" style="font-family:Space Grotesk,sans-serif; font-weight:600; font-size:18px;">Attestation d&rsquo;excellence &mdash; Programme Business Dunkin &amp; ISMAGI</div></div><div class="edu-date" style="font-size:13px; color:var(--muted2);">D&eacute;livr&eacute;e en avril 2026</div></div><div class="edu-desc" style="font-size:15px; color:var(--muted); margin-top:8px;">ISMAGI, Rabat</div></div><div class="edu-card lift" data-reveal style="border:1px solid var(--bd2); border-radius:16px; padding:26px 28px;"><div class="edu-head" style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;"><div class="edu-idn" style="display:flex; align-items:center; gap:14px;"><img src="./images/logos/ofppt-logo-sm.png" alt="Logo OFPPT" class="edu-logo" width="88" height="88" style="height:44px; width:auto; border-radius:8px; background:#fff; padding:4px; box-sizing:border-box; display:block;" decoding="async" loading="lazy"><div class="edu-title" style="font-family:Space Grotesk,sans-serif; font-weight:600; font-size:18px;">Programme d&rsquo;Innovation Entrepreneuriale : de l&rsquo;id&eacute;e au projet viable</div></div><div class="edu-date" style="font-size:13px; color:var(--muted2);">D&eacute;livr&eacute;e en mars 2024 &middot; Expir&eacute;e en juillet 2024</div></div><div class="edu-desc" style="font-size:15px; color:var(--muted); margin-top:8px;">Institut Sp&eacute;cialis&eacute; de Technologie Appliqu&eacute;e Hay Riad, Rabat</div></div></div></div></section><!-- SKILLS -->
+  <section id="skills" class="section" data-screen-label="Skills" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
+    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
+      <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">05 — Compétences</h2>
       <div>
-        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px;">
-          <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Connaissance des produits/services</span>
-          <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Compétences en négociation</span>
-          <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Gestion du temps</span>
-          <span style="padding:12px 20px; border-radius:999px; background:#0314af; color:#ffffff; font-weight:600; font-size:14px;">WordPress / CMS</span>
-          <span style="padding:12px 20px; border-radius:999px; background:#0314af; color:#ffffff; font-weight:600; font-size:14px;">Outils CRM</span>
-          <span style="padding:12px 20px; border-radius:999px; background:#0314af; color:#ffffff; font-weight:600; font-size:14px;">Canva</span>
-          <span style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Stratégie de contenu</span>
+        <div class="skill-cats" data-stagger style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px 24px; margin-bottom:40px;">
+        <div data-reveal>
+          <div class="skill-title" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:12px;">Marketing digital</div>
+          <div class="chips" style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span class="chip" style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Stratégie de contenu</span>
+          </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
-          <div>
-            <div style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:10px;">Langues</div>
-            <div style="font-size:16px; line-height:2;">Arabe<br>Français<br>Anglais</div>
-          </div>
-          <div style="grid-column:span 2;">
-            <div style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:10px;">Certification</div>
-            <div style="font-size:16px; line-height:1.6; color:var(--text);">Certificat de Formation Qualifiante — Programme d'Innovation Entrepreneuriale : de l'idée au projet viable<br><span style="color:var(--muted); font-size:14px;">Ista Hay Riad</span></div>
+        <div data-reveal>
+          <div class="skill-title" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:12px;">Développement commercial</div>
+          <div class="chips" style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span class="chip" style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Compétences en négociation</span>
           </div>
         </div>
+
+        <div data-reveal>
+          <div class="skill-title" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:12px;">Vente et relation client</div>
+          <div class="chips" style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span class="chip" style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Connaissance des produits/services</span>
+            <span class="chip" style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Gestion du temps</span>
+          </div>
+        </div>
+
+        <div data-reveal>
+          <div class="skill-title" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:12px;">Outils</div>
+          <div class="chips" style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span class="chip" style="padding:12px 20px; border-radius:999px; background:#0314af; color:#ffffff; font-weight:600; font-size:14px;">WordPress / CMS</span>
+            <span class="chip" style="padding:12px 20px; border-radius:999px; background:#0314af; color:#ffffff; font-weight:600; font-size:14px;">Outils CRM</span>
+            <span class="chip" style="padding:12px 20px; border-radius:999px; background:#0314af; color:#ffffff; font-weight:600; font-size:14px;">Canva</span>
+          </div>
+        </div>
+
+        <div data-reveal>
+          <div class="skill-title" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:12px;">Langues</div>
+          <div class="chips" style="display:flex; flex-wrap:wrap; gap:12px;">
+            <span class="chip" style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Arabe</span>
+            <span class="chip" style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Français</span>
+            <span class="chip" style="padding:12px 20px; border-radius:999px; border:1px solid var(--bd3); font-size:14px;">Anglais</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <div class="skill-title" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:12px;">Certification</div>
+        <div class="skill-note" style="font-size:16px; line-height:1.6; color:var(--text); max-width:760px;">Certificat de Formation Qualifiante — Programme d'Innovation Entrepreneuriale : de l'idée au projet viable<br><span style="color:var(--muted); font-size:14px;">Ista Hay Riad</span></div>
+      </div>
       </div>
     </div>
   </section>
 
   <!-- CREATIONS -->
-  <section id="creations" data-screen-label="Creations" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
+  <section id="creations" class="section" data-screen-label="Creations" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
+    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
       <div>
-        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0 0 12px;">06 — Créations</h2>
-        <p style="font-size:14px; color:var(--muted2); line-height:1.6; max-width:220px;">Visuels, campagnes &amp; contenu créés avec Canva et Photoshop pour des marques fictives et réelles.</p>
+        <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0 0 12px;">06 — Créations</h2>
+        <p class="section-intro" data-reveal style="font-size:14px; color:var(--muted2); line-height:1.6; max-width:220px;">Visuels, campagnes &amp; contenu créés avec Canva et Photoshop pour des marques fictives et réelles.</p>
       </div>
       <div>
-        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
-          <span style="padding:8px 16px; border-radius:999px; background:#0314af; color:#ffffff; font-weight:600; font-size:13px;">Dunkin</span>
-          <span style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); font-size:13px;">ASH Coffee</span>
-          <span style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); font-size:13px;">ASH Airways</span>
-          <span style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); font-size:13px;">Luma</span>
+        <div class="cr-filters" role="group" aria-label="Filtrer les créations" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
+          <button type="button" class="cr-filter" data-filter="all" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">Tout</button>
+          <button type="button" class="cr-filter" data-filter="videos" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">Vidéos</button>
+          <button type="button" class="cr-filter" data-filter="dunkin" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">Dunkin</button>
+          <button type="button" class="cr-filter" data-filter="ash" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">ASH</button>
+          <button type="button" class="cr-filter" data-filter="coffee" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">ASH Coffee</button>
+          <button type="button" class="cr-filter" data-filter="airways" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">ASH Airways</button>
+          <button type="button" class="cr-filter" data-filter="maroc" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">Maroc</button>
+          <button type="button" class="cr-filter" data-filter="luma" aria-pressed="false" style="padding:8px 16px; border-radius:999px; border:1px solid var(--bd3); background:transparent; color:var(--text); font-family:inherit; font-size:13px;">Luma</button>
         </div>
-        <div style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:14px;">Vidéos</div>
-        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px;">
+        <div class="cr-block" data-block="videos" data-reveal>
+        <div class="cr-label" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:14px;">Vidéos</div>
+        <div class="cr-videos" data-stagger style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px;">
 
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
+          <div class="cr-tile lift-media" data-cat="videos" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
             <video src="./images/creations/video-1.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
+          <div class="cr-tile lift-media" data-cat="videos" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
             <video src="./images/creations/video-2.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
+          <div class="cr-tile lift-media" data-cat="videos" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
             <video src="./images/creations/video-3.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
+          <div class="cr-tile lift-media" data-cat="videos" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1); background:#111; display:flex; align-items:center; justify-content:center;">
             <video src="./images/creations/video-4.mp4" controls="" playsinline="" preload="metadata" style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:auto;"></video>
           </div>
 
         </div>
-        <div style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:14px;">Visuels</div>
-        <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
+        </div>
 
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/ash-ball-trionda.jpg" alt="ASH — ballon Trionda, Coupe du monde 2026" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
-          </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/ash-summer-refresh.jpg" alt="ASH — affiche Summer Refresh : mango milk smoothie et lemon ice tea" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
-          </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/ash-coffee-iced.jpg" alt="ASH Coffee — affiche promotionnelle iced coffee" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
-          </div>
+      <div class="cr-block" data-block="images" data-reveal>
+        <div class="cr-label" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted2); margin-bottom:14px;">Visuels</div>
+        <div class="cr-grid" data-stagger style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
 
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-pool-pink-pineapple.jpeg" alt="Dunkin — boisson Pink Pineapple au bord de la piscine" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="ash" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/ash-ball-trionda.jpg" alt="ASH — ballon Trionda, Coupe du monde 2026" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-car-window.jpeg" alt="Dunkin — boisson glacée tendue par la fenêtre d une voiture" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="ash" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/ash-summer-refresh.jpg" alt="ASH — affiche Summer Refresh : mango milk smoothie et lemon ice tea" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-robe-rose.jpg" alt="Dunkin — visuel créatif : gobelet habillé d une robe rose" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="coffee" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/ash-coffee-iced.jpg" alt="ASH Coffee — affiche promotionnelle iced coffee" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
 
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/maillot-maroc-tribune.jpg" alt="Maillot du Maroc présenté dans les tribunes d un stade" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-pool-pink-pineapple.jpeg" alt="Dunkin — boisson Pink Pineapple au bord de la piscine" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/maillot-maroc-couloir.jpg" alt="Maillot du Maroc porté lors d un shooting en extérieur" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-car-window.jpeg" alt="Dunkin — boisson glacée tendue par la fenêtre d une voiture" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/maillot-maroc-escalier.jpg" alt="Maillot du Maroc mis en scène sur un escalier en pierre" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-robe-rose.jpg" alt="Dunkin — visuel créatif : gobelet habillé d une robe rose" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
 
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/ash-airways-equipe-maroc.jpg" alt="ASH Airways — l'équipe nationale du Maroc dans un stade, campagne Ahsan" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="maroc" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/maillot-maroc-tribune.jpg" alt="Maillot du Maroc présenté dans les tribunes d un stade" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/ash-airways-hotesse-faucon.jpg" alt="ASH Airways — hôtesse de l'air en uniforme avec un faucon" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="maroc" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/maillot-maroc-couloir.jpg" alt="Maillot du Maroc porté lors d un shooting en extérieur" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/ash-coffee-bear-milk.jpg" alt="ASH Coffee — gamme Bear Milk : chocolat, fraise, caramel et thé vert" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="maroc" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/maillot-maroc-escalier.jpg" alt="Maillot du Maroc mis en scène sur un escalier en pierre" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/ash-donuts-menu.jpg" alt="ASH — carte de neuf donuts avec leurs prix" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+
+          <div class="cr-tile lift-media" data-cat="airways" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/ash-airways-equipe-maroc.jpg" alt="ASH Airways — l'équipe nationale du Maroc dans un stade, campagne Ahsan" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/maillot-maroc-metro.jpg" alt="Maillot du Maroc mis en scène dans une station de métro" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="airways" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/ash-airways-hotesse-faucon.jpg" alt="ASH Airways — hôtesse de l'air en uniforme avec un faucon" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-pineapple-plateau.jpg" alt="Dunkin' — boisson Pink Pineapple et donut sur un plateau en extérieur" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="coffee" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/ash-coffee-bear-milk.jpg" alt="ASH Coffee — gamme Bear Milk : chocolat, fraise, caramel et thé vert" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-fleurs-roses.jpg" alt="Dunkin' — boisson Pink Pineapple devant un massif de fleurs" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="ash" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/ash-donuts-menu.jpg" alt="ASH — carte de neuf donuts avec leurs prix" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-panneau-autoroute.jpg" alt="Dunkin' — panneau autoroutier détourné en darija" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="maroc" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/maillot-maroc-metro.jpg" alt="Maillot du Maroc mis en scène dans une station de métro" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-chaton-sac.jpg" alt="Dunkin' — visuel humoristique avec un chaton et la boisson Pink Pineapple" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-pineapple-plateau.jpg" alt="Dunkin' — boisson Pink Pineapple et donut sur un plateau en extérieur" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-matcha-messages.jpg" alt="Dunkin' — matcha glacé avec bulles de conversation" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-fleurs-roses.jpg" alt="Dunkin' — boisson Pink Pineapple devant un massif de fleurs" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-passenger-princess.jpg" alt="Dunkin' — boisson maintenue par la ceinture de sécurité, passenger princess" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-panneau-autoroute.jpg" alt="Dunkin' — panneau autoroutier détourné en darija" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-spongebob.jpg" alt="Dunkin' — détournement d'une scène de dessin animé avec la boisson" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-chaton-sac.jpg" alt="Dunkin' — visuel humoristique avec un chaton et la boisson Pink Pineapple" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-summer-2026.jpg" alt="Dunkin' — affiche Summer 2026 sur le capot d'une voiture verte" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-matcha-messages.jpg" alt="Dunkin' — matcha glacé avec bulles de conversation" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-meteo-rabat.jpg" alt="Dunkin' — météo de Rabat détournée avec les boissons de la marque" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-passenger-princess.jpg" alt="Dunkin' — boisson maintenue par la ceinture de sécurité, passenger princess" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/dunkin-taakia-foule.jpg" alt="Dunkin' — visuel humoristique sur l'affluence en magasin" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-spongebob.jpg" alt="Dunkin' — détournement d'une scène de dessin animé avec la boisson" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
-          <div style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
-            <img src="./images/creations/luma-sacs-cafe.jpg" alt="Luma — sacs papier de la marque posés parmi des grains de café" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-summer-2026.jpg" alt="Dunkin' — affiche Summer 2026 sur le capot d'une voiture verte" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-meteo-rabat.jpg" alt="Dunkin' — météo de Rabat détournée avec les boissons de la marque" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+          <div class="cr-tile lift-media" data-cat="dunkin" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/dunkin-taakia-foule.jpg" alt="Dunkin' — visuel humoristique sur l'affluence en magasin" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
+          </div>
+          <div class="cr-tile lift-media" data-cat="luma" style="position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--bd1);">
+            <img width="800" height="1000" src="./images/creations/luma-sacs-cafe.jpg" alt="Luma — sacs papier de la marque posés parmi des grains de café" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="lazy">
           </div>
 
           
@@ -349,16 +390,17 @@
           
 
         </div>
+      </div>
       </div>
     </div>
   </section>
 
   <!-- PROJETS -->
-  <section id="projects" data-screen-label="Projects" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
+  <section id="projects" class="section" data-screen-label="Projects" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
+    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
       <div>
-        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0 0 12px;">07 — Projets</h2>
-        <p style="font-size:14px; color:var(--muted2); line-height:1.6; max-width:220px;">Projets académiques de branding, de marketing digital et de production audiovisuelle. Cliquez sur une carte pour ouvrir la fiche détaillée du projet.</p>
+        <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0 0 12px;">07 — Projets</h2>
+        <p class="section-intro" data-reveal style="font-size:14px; color:var(--muted2); line-height:1.6; max-width:220px;">Projets académiques de branding, de marketing digital et de production audiovisuelle. Cliquez sur une carte pour ouvrir la fiche détaillée du projet.</p>
       </div>
       <div>
         <!-- Les 4 cartes et la fenetre detaillee sont generees par ./js/projects.js
@@ -378,35 +420,66 @@
   </section>
 
   <!-- VOLUNTEER -->
-  <section id="volunteer" data-screen-label="Volunteer" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
-      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">08 — Bénévolat</h2>
-      <div style="border:1px solid rgba(3,20,175,0.4); background:rgba(3,20,175,0.12); border-radius:16px; padding:28px 32px;">
-        <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:19px; margin-bottom:8px;">Bénévole Accueil — Coupe d'Afrique des Nations (CAN) 2025, Maroc</div>
-        <div style="font-size:15px; color:var(--muted); line-height:1.7;">Gestion du flux des supporters et orientation des délégations internationales. Communication multilingue et résolution de problèmes en temps réel.</div>
+  <section id="volunteer" class="section" data-screen-label="Volunteer" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
+    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
+      <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0;">08 — Bénévolat</h2>
+      <div class="volunteer-card lift" data-reveal style="border:1px solid rgba(3,20,175,0.4); background:rgba(3,20,175,0.12); border-radius:16px; padding:28px 32px;">
+        <div class="volunteer-title" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:19px; margin-bottom:8px;">Bénévole Accueil — Coupe d'Afrique des Nations (CAN) 2025, Maroc</div>
+        <div class="volunteer-desc" style="font-size:15px; color:var(--muted); line-height:1.7;">Gestion du flux des supporters et orientation des délégations internationales. Communication multilingue et résolution de problèmes en temps réel.</div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" data-screen-label="Contact" style="padding:120px 6vw 100px; border-top:1px solid var(--bd1); text-align:center;">
-    <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,5vw,56px); margin:0 0 20px;">Travaillons ensemble.</h2>
-    <p style="font-size:17px; color:var(--muted); margin:0 0 40px;">Disponible pour des opportunités en marketing digital et développement commercial.</p>
-    <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; font-size:16px;">
-      <a href="mailto:belghitiachraf41@gmail.com" style="color:#ffffff; background:#0314af; padding:16px 28px; border-radius:999px; text-decoration:none; font-weight:600;">belghitiachraf41@gmail.com</a>
-      <a href="tel:+212655531774" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;">+212 655 531 774</a>
-          <a href="./documents/Achraf_Belghiti_Resume%20(1)%20(2).pdf.pdf" download="CV-Achraf-Belghiti.pdf" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;">Voir mon CV (PDF)</a>
-      <a href="https://www.linkedin.com/in/achraf-belghiti-marketing" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;" rel="noopener noreferrer">LinkedIn @achrafbelghiti</a>
-      <a href="https://www.instagram.com/madebyashraf/" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;" rel="noopener noreferrer">Instagram @madebyashraf</a>
+  <section id="contact" class="section contact" data-screen-label="Contact" style="padding:120px 6vw 100px; border-top:1px solid var(--bd1); text-align:center;">
+    <h2 class="contact-title" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,5vw,56px); margin:0 0 20px;">Travaillons ensemble.</h2>
+    <p class="contact-lead" data-reveal style="font-size:17px; color:var(--muted); margin:0 0 40px;">Disponible pour des opportunités en marketing digital et développement commercial.</p>
+    <div class="contact-actions" data-stagger style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; font-size:16px;">
+      <a class="contact-btn" data-reveal href="mailto:belghitiachraf41@gmail.com" style="color:#ffffff; background:#0314af; padding:16px 28px; border-radius:999px; text-decoration:none; font-weight:600;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg><span>belghitiachraf41@gmail.com</span></a>
+      <a class="contact-btn" data-reveal href="tel:+212655531774" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 005.5 5.5l1.5-2 4 1.5v3c0 1.1-.9 2-2 2A15.5 15.5 0 014.5 5.5c0-1.1.9-2 2-2z"/></svg><span>+212 655 531 774</span></a>
+          <a class="contact-btn" data-reveal href="./documents/Achraf_Belghiti_Resume%20(1)%20(2).pdf.pdf" download="CV-Achraf-Belghiti.pdf" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v10m0 0l-4-4m4 4l4-4M5 18.5h14"/></svg><span>Voir mon CV (PDF)</span></a>
+      <a class="contact-btn" data-reveal href="https://www.linkedin.com/in/achraf-belghiti-marketing" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M8 10.5v6M8 7.6v.1M12 16.5v-3.2a2 2 0 014 0v3.2M12 16.5v-6"/></svg><span>LinkedIn @achrafbelghiti</span></a>
+      <a class="contact-btn" data-reveal href="https://www.instagram.com/madebyashraf/" target="_blank" style="color:var(--text); border:1px solid var(--bd5); padding:16px 28px; border-radius:999px; text-decoration:none;" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7v.1"/></svg><span>Instagram @madebyashraf</span></a>
     </div>
-    <div style="margin-top:80px; font-size:13px; color:var(--muted3);">Rabat, Maroc — Hay El Menzeh</div>
+    <div class="contact-meta" data-reveal style="margin-top:80px; font-size:13px; color:var(--muted3);">Rabat, Maroc — Hay El Menzeh</div>
   </section>
 
 
 
-    <footer style="padding:44px 6vw 60px; border-top:1px solid var(--bd1); display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; font-size:13px; color:var(--muted3);"><span>© <span data-year="">2026</span> Achraf Belghiti — Tous droits réservés.</span><span>Site statique HTML / CSS / JavaScript — hébergé sur GitHub Pages.</span></footer>
+    <footer class="site-footer" style="padding:44px 6vw 60px; border-top:1px solid var(--bd1); display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; font-size:13px; color:var(--muted3);"><span>© <span data-year="">2026</span> Achraf Belghiti — Tous droits réservés.</span><span>Site statique HTML / CSS / JavaScript — hébergé sur GitHub Pages.</span></footer>
 
   </div>
+
+<!-- MENU MOBILE PLEIN ECRAN -->
+<div class="mnav" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
+  <div class="mnav-scrim" aria-hidden="true"></div>
+  <div class="mnav-panel">
+    <div class="mnav-top">
+      <p class="mnav-kicker">Navigation</p>
+      <button type="button" class="mnav-close" aria-label="Fermer le menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <nav class="mnav-list" aria-label="Sections du portfolio">
+    <a class="mnav-item" href="#about"><span class="mnav-num" aria-hidden="true">01</span>Profil<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    <a class="mnav-item" href="#experience"><span class="mnav-num" aria-hidden="true">02</span>Expérience<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    <a class="mnav-item" href="#education"><span class="mnav-num" aria-hidden="true">03</span>Éducation<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    <a class="mnav-item" href="#skills"><span class="mnav-num" aria-hidden="true">04</span>Compétences<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    <a class="mnav-item" href="#creations"><span class="mnav-num" aria-hidden="true">05</span>Créations<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    <a class="mnav-item" href="#projects"><span class="mnav-num" aria-hidden="true">06</span>Projets<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    <a class="mnav-item" href="#volunteer"><span class="mnav-num" aria-hidden="true">07</span>Bénévolat<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    <a class="mnav-item" href="#contact"><span class="mnav-num" aria-hidden="true">08</span>Contact<svg class="mnav-arrow" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+    </nav>
+    <div class="mnav-foot">
+      <a class="mnav-cta mnav-cta-primary" href="mailto:belghitiachraf41@gmail.com"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>Me contacter</a>
+      <a class="mnav-cta mnav-cta-ghost" href="./documents/Achraf_Belghiti_Resume%20(1)%20(2).pdf.pdf" download="CV-Achraf-Belghiti.pdf"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v10m0 0l-4-4m4 4l4-4M5 18.5h14"/></svg>Voir mon CV</a>
+      <div class="mnav-social">
+        <a href="https://www.linkedin.com/in/achraf-belghiti-marketing" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/madebyashraf/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="tel:+212655531774">Téléphone</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script src="./js/script.js" defer=""></script>
 <script src="./js/chatbot.js" defer=""></script>
