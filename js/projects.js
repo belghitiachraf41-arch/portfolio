@@ -373,7 +373,9 @@
   function cardHtml(p, index) {
     return '<article class="proj-card lift" data-proj-id="' + esc(p.id) + '" data-index="' + index + '"'
          +   (REDUCE ? '' : ' data-reveal=""') + '>'
-         +   '<div class="proj-cover">' + coverHtml(p, 'proj-cover-title') + '</div>'
+         +   '<div class="proj-cover' + (p.cover && p.coverHasText ? ' proj-cover-baked' : '') + '">'
+         +     coverHtml(p, 'proj-cover-title')
+         +   '</div>'
          +   '<div class="proj-body">'
          +     '<span class="proj-kicker">' + esc(p.categoryShort) + '</span>'
          +     '<h3 class="proj-title">' + esc(p.title) + '</h3>'
