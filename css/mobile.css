@@ -780,3 +780,43 @@ body.mnav-lock {
   .mnav, .nav-toggle, .nav-actions, .to-top, .pcb-btn, .pcb-panel { display: none !important; }
   html.has-reveal [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
+
+/* =========================================================================
+   11. Galerie Creations : affichage progressif (bouton "Voir plus")
+   Le repliage est gere par script.js, uniquement sous 768 px.
+   ========================================================================= */
+.cr-tile.is-clamped { display: none !important; }
+.cr-more { display: none; }
+
+@media (max-width: 768px) {
+  .cr-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 14px;
+    padding: 0 18px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    border: 1px solid var(--lg-bd);
+    border-radius: 999px;
+    background: var(--lg-fill);
+    -webkit-backdrop-filter: var(--lg-blur);
+    backdrop-filter: var(--lg-blur);
+    transition: transform 0.22s var(--m-ease);
+  }
+  .cr-more:active { transform: scale(0.98); }
+  .cr-more[hidden] { display: none !important; }
+
+  /* cartes projets un peu plus basses : la page reste lisible sans etre longue */
+  .proj-cover { height: clamp(180px, 46vw, 230px) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-more { transition: none !important; }
+}
