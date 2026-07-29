@@ -888,13 +888,15 @@ nav::before {
 html[data-theme="dark"] {
   --proj-panel: rgba(13, 14, 26, 0.90);
   --proj-soft: rgba(255, 255, 255, 0.05);
-  --proj-scrim: linear-gradient(180deg, rgba(4, 4, 12, 0.10) 0%, rgba(4, 4, 12, 0.62) 100%);
+  --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 55%, rgba(0, 0, 0, 0.60) 100%);
+  --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.46) 55%, rgba(0, 0, 0, 0.74) 100%);
 }
 
 html[data-theme="light"] {
   --proj-panel: rgba(252, 252, 255, 0.94);
   --proj-soft: rgba(10, 10, 15, 0.035);
-  --proj-scrim: linear-gradient(180deg, rgba(4, 4, 12, 0.06) 0%, rgba(4, 4, 12, 0.58) 100%);
+  --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 55%, rgba(0, 0, 0, 0.60) 100%);
+  --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.46) 55%, rgba(0, 0, 0, 0.74) 100%);
 }
 
 /* --- 1. Grille responsive ------------------------------------------------ */
@@ -937,7 +939,9 @@ html[data-theme="light"] {
 .proj-card[data-reveal].is-in { opacity: 1; transform: none; }
 
 .proj-card:hover { transform: translate3d(0, -7px, 0); }
-.proj-card:hover .proj-cover-art { transform: scale(1.06); }
+.proj-card:hover .proj-cover-art,
+.proj-card:hover .proj-cover-img { transform: scale(1.05); }
+.proj-card:hover .proj-cover::after { background: var(--proj-scrim-hover); }
 .proj-card:hover .proj-arrow { transform: translate3d(5px, 0, 0); }
 .proj-card:hover .proj-badge { border-color: var(--bd5); color: var(--text); transform: translate3d(0, -2px, 0); }
 .proj-card:hover .proj-badge:nth-child(2) { transition-delay: 0.05s; }
@@ -947,8 +951,9 @@ html[data-theme="light"] {
 .proj-cover {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 10;
+  height: clamp(240px, 20vw, 280px);
   overflow: hidden;
+  border-radius: 16px 16px 0 0;
   background: #0a0a12;
 }
 
@@ -959,16 +964,38 @@ html[data-theme="light"] {
   background-size: cover;
   background-position: center;
   transform: scale(1.001);
-  transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 400ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.proj-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Image de couverture : remplit toute la zone, sans etirement, nette sur
+   ecrans Retina (fichiers 763x502 pour une carte affichee ~390x260). */
+.proj-cover-img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.001);
+  transform-origin: center;
+  transition: transform 400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+/* Si une image manque, on la masque : le degrade de marque reprend sa place. */
+.proj-cover-img.is-missing { display: none; }
+
+/* Banniere du modal : on cadre le haut de la photo pour ne pas superposer
+   deux fois le titre (celui incruste dans l'image et celui en HTML). */
+.proj-banner-img { object-position: center 22%; }
 
 .proj-cover::after {
   content: "";
   position: absolute;
   inset: 0;
   background: var(--proj-scrim);
+  transition: background 400ms ease;
   pointer-events: none;
 }
 
@@ -1345,6 +1372,7 @@ body.proj-modal-open { overflow: hidden; }
 @media (max-width: 768px) {
   .proj-modal { padding: 16px; }
   .proj-modal-dialog { max-height: 92vh; }
+  .proj-cover { height: 250px; }
   .proj-modal-banner { height: 152px; }
   .proj-modal-body { padding: 22px 20px 26px; }
   .proj-modal-banner-inner { padding: 18px 20px; }
@@ -1365,6 +1393,7 @@ body.proj-modal-open { overflow: hidden; }
   .proj-modal-actions { padding: 14px 18px 18px; }
   .proj-btn { flex: 1 1 auto; justify-content: center; }
   .proj-body { padding: 20px 18px 18px; }
+  .proj-cover { height: 240px; }
   .proj-cover-title { font-size: 19px; }
 }
 
@@ -1372,6 +1401,8 @@ body.proj-modal-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .proj-card,
   .proj-cover-art,
+  .proj-cover-img,
+  .proj-cover::after,
   .proj-arrow,
   .proj-badge,
   .proj-btn,
@@ -1384,7 +1415,9 @@ body.proj-modal-open { overflow: hidden; }
   .proj-card,
   .proj-card[data-reveal] { opacity: 1 !important; transform: none !important; }
   .proj-card:hover { transform: none !important; }
-  .proj-card:hover .proj-cover-art { transform: none !important; }
+  .proj-card:hover .proj-cover-art,
+  .proj-card:hover .proj-cover-img { transform: none !important; }
+  .proj-card:hover .proj-cover::after { background: var(--proj-scrim) !important; }
   .proj-card:hover .proj-badge { transform: none !important; }
   .proj-card:hover .proj-arrow { transform: none !important; }
   .proj-modal-close:hover { transform: none !important; }
