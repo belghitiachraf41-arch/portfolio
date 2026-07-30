@@ -400,12 +400,14 @@
 
   <!-- PROJETS -->
   <section id="projects" class="section" data-screen-label="Projects" style="padding:100px 6vw; border-top:1px solid var(--bd1);">
-    <div class="section-grid" style="display:grid; grid-template-columns: 0.4fr 1fr; gap:60px;">
-      <div>
-        <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0 0 12px;">07 — Projets</h2>
-        <p class="section-intro" data-reveal style="font-size:14px; color:var(--muted2); line-height:1.6; max-width:220px;">Projets académiques de branding, de marketing digital et de production audiovisuelle. Cliquez sur une carte pour ouvrir la fiche détaillée du projet.</p>
+    <div class="section-grid proj-layout">
+      <div class="proj-intro">
+        <h2 class="section-num" data-reveal style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted2); margin:0 0 14px;">07 — Projets</h2>
+        <p class="proj-intro-title" data-reveal>Études de cas</p>
+        <p class="section-intro proj-intro-text" data-reveal>Projets académiques de branding, de marketing digital et de production audiovisuelle. Cliquez sur une carte pour ouvrir la fiche détaillée du projet.</p>
+        <p class="proj-count" data-reveal><span class="proj-count-num">04</span><span class="proj-count-label">projets sélectionnés</span></p>
       </div>
-      <div>
+      <div class="proj-main">
         <!-- Les 4 cartes et la fenetre detaillee sont generees par ./js/projects.js
              a partir du tableau de donnees "projects" (une seule source de verite). -->
         <div class="proj-grid" id="proj-grid">
