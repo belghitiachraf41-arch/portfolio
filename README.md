@@ -66,6 +66,23 @@ Sans Git : bouton **Add file → Upload files** sur GitHub, puis glisser les fic
 - ismagi-logo.png
 - ofppt-logo-sm.png
 
+**`images/icons/` — icônes flottantes du hero (composant FloatingIcons)**
+- wordpress.png
+- canva.png
+- capcut.png
+- linkedin.png
+- pinterest.png
+- facebook.png
+- tiktok.png
+- illustrator.png
+- premiere.png
+- github.png
+- instagram.png
+
+> Format conseillé : PNG carré transparent, 512 px, ≤ 30 Ko. Un fichier absent
+> est simplement ignoré (l'icône n'est pas affichée). La liste de référence se
+> trouve dans `js/floating-icons.js` (tableau `ICONS`).
+
 **`images/creations/` — images**
 - dunkin-summer-2026.jpeg
 - dunkin-pool-pink-pineapple.jpeg
