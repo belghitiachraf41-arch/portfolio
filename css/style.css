@@ -888,43 +888,104 @@ nav::before {
 html[data-theme="dark"] {
   --proj-panel: rgba(13, 14, 26, 0.90);
   --proj-soft: rgba(255, 255, 255, 0.05);
+  --proj-card-bg: rgba(255, 255, 255, 0.035);
+  --proj-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --proj-card-shadow-hover: 0 26px 60px -30px rgba(0, 0, 0, 0.78);
+  --proj-section-bg: transparent;
+  --proj-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.72) 100%);
   --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.56) 55%, rgba(0, 0, 0, 0.84) 100%);
-  /* Version douce : pour les couvertures dont le texte est deja incruste
-     dans l'image (sinon le voile noir grise le texte de la maquette). */
-  --proj-scrim-soft: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 58%, rgba(0, 0, 0, 0.14) 100%);
-  --proj-scrim-soft-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.14) 58%, rgba(0, 0, 0, 0.26) 100%);
+  /* Couvertures dont le titre est deja incruste dans l'image : voile presque
+     invisible, sinon la typographie de la maquette se grise. */
+  --proj-scrim-soft: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.02) 70%, rgba(0, 0, 0, 0.06) 100%);
+  --proj-scrim-soft-hover: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.04) 70%, rgba(0, 0, 0, 0.11) 100%);
 }
 
 html[data-theme="light"] {
   --proj-panel: rgba(252, 252, 255, 0.94);
   --proj-soft: rgba(10, 10, 15, 0.035);
+  --proj-card-bg: #ffffff;
+  --proj-card-shadow: 0 1px 2px rgba(12, 14, 34, 0.05), 0 14px 34px -28px rgba(12, 14, 34, 0.20);
+  --proj-card-shadow-hover: 0 24px 50px -28px rgba(12, 14, 34, 0.30);
+  --proj-section-bg: linear-gradient(180deg, rgba(12, 14, 34, 0.016) 0%, rgba(12, 14, 34, 0) 46%);
+  --proj-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --proj-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.72) 100%);
   --proj-scrim-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.56) 55%, rgba(0, 0, 0, 0.84) 100%);
-  /* Version douce : pour les couvertures dont le texte est deja incruste
-     dans l'image (sinon le voile noir grise le texte de la maquette). */
-  --proj-scrim-soft: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 58%, rgba(0, 0, 0, 0.14) 100%);
-  --proj-scrim-soft-hover: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.14) 58%, rgba(0, 0, 0, 0.26) 100%);
+  --proj-scrim-soft: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.02) 70%, rgba(0, 0, 0, 0.06) 100%);
+  --proj-scrim-soft-hover: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.04) 70%, rgba(0, 0, 0, 0.11) 100%);
 }
 
-/* --- 1. Grille responsive ------------------------------------------------ */
+/* Fond clair tres subtil, uniquement sur la section Projets. */
+#projects { background: var(--proj-section-bg); }
+
+/* --- 1. Mise en page : bloc d'introduction + grille de projets ----------- */
+.proj-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.33fr) minmax(0, 1fr);
+  gap: clamp(30px, 2.4vw, 40px);
+  align-items: start;
+}
+
+.proj-intro { max-width: 320px; }
+
+.proj-intro-title {
+  margin: 0 0 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: clamp(24px, 1.9vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.proj-intro-text {
+  margin: 0 0 26px;
+  max-width: 280px;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--muted2);
+}
+
+.proj-count {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--bd2);
+}
+
+.proj-count-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--accent-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.proj-count-label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted3);
+}
+
 .proj-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+  gap: clamp(26px, 2.2vw, 38px) clamp(20px, 1.6vw, 30px);
   align-items: stretch;
 }
 
-@media (min-width: 1800px) {
-  .proj-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-
-@media (max-width: 1024px) {
-  .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-}
-
-@media (max-width: 640px) {
-  .proj-grid { grid-template-columns: 1fr; gap: 16px; }
+/* Tablette large : l'introduction passe au-dessus, la grille prend toute la
+   largeur disponible et garde 2 cartes par ligne (jamais 4 cartes etroites). */
+@media (max-width: 1100px) {
+  .proj-layout { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+  .proj-intro { max-width: 620px; }
+  .proj-intro-text { max-width: 560px; margin-bottom: 22px; }
+  .proj-count { display: inline-flex; }
+  .proj-grid { gap: 24px 20px; }
 }
 
 .proj-noscript { margin: 0; padding-left: 20px; font-size: 14px; line-height: 2; color: var(--muted); }
@@ -937,32 +998,52 @@ html[data-theme="light"] {
   flex-direction: column;
   height: 100%;
   border: 1px solid var(--bd2);
-  border-radius: 16px;
-  background: var(--card);
+  border-radius: 22px;
+  background: var(--proj-card-bg);
+  box-shadow: var(--proj-card-shadow);
   overflow: hidden;
   cursor: pointer;
+  transition: transform 420ms var(--proj-ease),
+              box-shadow 420ms ease,
+              border-color 420ms ease,
+              opacity 460ms var(--proj-ease);
 }
 
-.proj-card[data-reveal] { opacity: 0; transform: translate3d(0, 22px, 0); }
-.proj-card[data-reveal].is-in { opacity: 1; transform: none; }
+/* Apparition au defilement : opacite 0 -> 1, translateY 24px -> 0.
+   Le delai progressif est applique par ./js/projects.js (90 ms par carte). */
+.proj-card[data-proj-reveal] { opacity: 0; transform: translate3d(0, 24px, 0); }
+.proj-card[data-proj-reveal].is-in { opacity: 1; transform: none; }
 
-.proj-card:hover { transform: translate3d(0, -7px, 0); }
+.proj-card:hover,
+.proj-card:focus-within {
+  transform: translate3d(0, -6px, 0);
+  border-color: var(--bd4);
+  box-shadow: var(--proj-card-shadow-hover);
+}
+
 .proj-card:hover .proj-cover-art,
-.proj-card:hover .proj-cover-img { transform: scale(1.05); }
+.proj-card:focus-within .proj-cover-art,
+.proj-card:hover .proj-cover-img,
+.proj-card:focus-within .proj-cover-img { transform: scale(1.035); }
+
 .proj-card:hover .proj-cover::after { background: var(--proj-scrim-hover); }
 .proj-card:hover .proj-cover-baked::after { background: var(--proj-scrim-soft-hover); }
-.proj-card:hover .proj-arrow { transform: translate3d(5px, 0, 0); }
-.proj-card:hover .proj-badge { border-color: var(--bd5); color: var(--text); transform: translate3d(0, -2px, 0); }
-.proj-card:hover .proj-badge:nth-child(2) { transition-delay: 0.05s; }
-.proj-card:hover .proj-badge:nth-child(3) { transition-delay: 0.1s; }
+.proj-card:hover .proj-arrow,
+.proj-card:focus-within .proj-arrow { transform: translate3d(6px, 0, 0); }
+.proj-card:hover .proj-open,
+.proj-card:focus-within .proj-open { color: var(--accent-soft); }
+.proj-card:hover .proj-badge { border-color: var(--bd4); color: var(--text); }
 
-/* --- 3. Visuel de couverture (aucun fichier image requis) --------------- */
+/* --- 3. Grande image de couverture (format paysage) --------------------- */
 .proj-cover {
   position: relative;
   display: block;
-  height: clamp(240px, 20vw, 280px);
+  width: 100%;
+  /* Ratio exact des visuels fournis (763 x 502) : l'image est cadree en
+     paysage sans aucun recadrage, donc aucun titre ni logo n'est coupe. */
+  aspect-ratio: 763 / 502;
   overflow: hidden;
-  border-radius: 16px 16px 0 0;
+  border-radius: 21px 21px 0 0;
   background: #0a0a12;
 }
 
@@ -973,11 +1054,11 @@ html[data-theme="light"] {
   background-size: cover;
   background-position: center;
   transform: scale(1.001);
-  transition: transform 400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 420ms var(--proj-ease);
 }
 
-/* Image de couverture : remplit toute la zone, sans etirement, nette sur
-   ecrans Retina (fichiers 763x502 pour une carte affichee ~390x260). */
+/* Image de couverture : toute la largeur de la carte, object-fit: cover,
+   jamais deformee (le ratio du conteneur est celui du fichier source). */
 .proj-cover-img {
   position: absolute;
   inset: 0;
@@ -988,7 +1069,7 @@ html[data-theme="light"] {
   object-position: center;
   transform: scale(1.001);
   transform-origin: center;
-  transition: transform 400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 420ms var(--proj-ease);
   will-change: transform;
 }
 
@@ -1004,14 +1085,14 @@ html[data-theme="light"] {
   position: absolute;
   inset: 0;
   background: var(--proj-scrim);
-  transition: background 400ms ease;
+  transition: background 420ms ease;
   pointer-events: none;
 }
 
-/* Couverture dont l'icone, le titre et la categorie sont deja incrustes dans
-   l'image : voile tres leger, sinon la typographie de la maquette se grise. */
 .proj-cover-baked::after { background: var(--proj-scrim-soft); }
 
+/* Titre incruste en HTML : uniquement en secours, quand aucune image n'est
+   disponible. Sur les cartes, le titre est toujours affiche sous l'image. */
 .proj-cover-inner {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -1019,7 +1100,7 @@ html[data-theme="light"] {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 16px 18px;
+  padding: 18px 20px;
   color: #ffffff;
 }
 
@@ -1055,18 +1136,20 @@ html[data-theme="light"] {
   opacity: 0.86;
 }
 
-/* --- 4. Contenu de la carte --------------------------------------------- */
+/* --- 4. Contenu de la carte, sous l'image ------------------------------- */
 .proj-body {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: 11px;
-  padding: 22px 22px 20px;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 26px 26px 22px;
 }
 
 .proj-kicker {
   font-size: 11px;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted3);
 }
@@ -1075,66 +1158,72 @@ html[data-theme="light"] {
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 19px;
-  line-height: 1.28;
+  font-size: clamp(20px, 1.45vw, 24px);
+  line-height: 1.22;
+  letter-spacing: -0.015em;
   color: var(--text);
 }
 
 .proj-desc {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.65;
+  max-width: 46ch;
+  font-size: 15px;
+  line-height: 1.68;
   color: var(--muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .proj-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 2px 0 0;
+  gap: 7px;
+  margin: 6px 0 0;
   padding: 0;
   list-style: none;
 }
 
 .proj-badge {
-  padding: 6px 12px;
+  padding: 4px 11px;
   border: 1px solid var(--bd3);
   border-radius: 999px;
   background: transparent;
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.015em;
   color: var(--muted);
-  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
-              border-color 0.35s ease,
-              color 0.35s ease;
+  white-space: nowrap;
+  transition: border-color 0.35s ease, color 0.35s ease;
 }
 
-.proj-badges-lg .proj-badge { font-size: 12.5px; padding: 7px 14px; }
+.proj-badges-lg .proj-badge {
+  padding: 7px 14px;
+  font-size: 12.5px;
+  white-space: normal;
+}
 
 .proj-foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
+  width: 100%;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--bd2);
 }
 
 .proj-open {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   padding: 0;
   border: 0;
   background: transparent;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text);
   cursor: pointer;
+  transition: color 0.35s ease;
 }
 
 .proj-open:focus-visible {
@@ -1148,10 +1237,16 @@ html[data-theme="light"] {
 .proj-arrow {
   width: 15px;
   height: 15px;
-  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 420ms var(--proj-ease);
 }
 
-.proj-date { font-size: 12px; color: var(--muted3); }
+.proj-date {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--muted3);
+  font-variant-numeric: tabular-nums;
+}
+
 
 /* --- 5. Fenetre detaillee (modal) --------------------------------------- */
 body.proj-modal-open { overflow: hidden; }
@@ -1385,7 +1480,6 @@ body.proj-modal-open { overflow: hidden; }
 @media (max-width: 768px) {
   .proj-modal { padding: 16px; }
   .proj-modal-dialog { max-height: 92vh; }
-  .proj-cover { height: 250px; }
   .proj-modal-banner { height: 152px; }
   .proj-modal-body { padding: 22px 20px 26px; }
   .proj-modal-banner-inner { padding: 18px 20px; }
@@ -1406,7 +1500,6 @@ body.proj-modal-open { overflow: hidden; }
   .proj-modal-actions { padding: 14px 18px 18px; }
   .proj-btn { flex: 1 1 auto; justify-content: center; }
   .proj-body { padding: 20px 18px 18px; }
-  .proj-cover { height: 240px; }
   .proj-cover-title { font-size: 19px; }
 }
 
@@ -1426,13 +1519,12 @@ body.proj-modal-open { overflow: hidden; }
   }
 
   .proj-card,
-  .proj-card[data-reveal] { opacity: 1 !important; transform: none !important; }
+  .proj-card[data-proj-reveal] { opacity: 1 !important; transform: none !important; }
   .proj-card:hover { transform: none !important; }
   .proj-card:hover .proj-cover-art,
   .proj-card:hover .proj-cover-img { transform: none !important; }
   .proj-card:hover .proj-cover::after { background: var(--proj-scrim) !important; }
   .proj-card:hover .proj-cover-baked::after { background: var(--proj-scrim-soft) !important; }
-  .proj-card:hover .proj-badge { transform: none !important; }
   .proj-card:hover .proj-arrow { transform: none !important; }
   .proj-modal-close:hover { transform: none !important; }
   .proj-btn:hover { transform: none !important; }
