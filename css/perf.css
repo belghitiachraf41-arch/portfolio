@@ -13,8 +13,12 @@
       tous les calques flous en permanence, meme sans interaction.
    4. Transitions sur box-shadow / background sur de nombreux elements.
 
-   Ordre des sections : le bloc mobile (7) doit rester avant-dernier pour
-   avoir le dernier mot sur les sections precedentes.
+   Notes de maintenance :
+   - Les fonds du site sont des degrades : il faut redefinir
+     "background-image" (et pas seulement "background-color") pour les
+     surfaces qui perdent leur flou, sinon elles restent transparentes.
+   - Le bloc mobile (section 8) doit rester avant la section 9 pour avoir
+     le dernier mot sur les sections precedentes.
    ========================================================================== */
 
 /* --- 1. Verre depoli : le flou est desactive partout --------------------- */
@@ -38,7 +42,7 @@ html:root[data-theme="light"] {
   --lg-sh: 0 8px 22px -14px rgba(20, 30, 90, 0.20) !important;
 }
 
-/* --- 2. Seuls elements qui gardent un flou : nav et voiles plein ecran --- */
+/* --- 2. Seuls elements qui gardent un flou : nav et voile de la galerie -- */
 /* La nav est collante : elle est recomposee a chaque image du defilement.
    Un rayon plus faible garde l'effet verre pour un cout tres inferieur. */
 nav.site-nav {
@@ -95,13 +99,22 @@ button,
 }
 
 /* --- 7. Fenetres modales : fond opaque au lieu du flou ------------------- */
-.pcb-panel { background-color: rgba(10, 12, 30, 0.96) !important; }
-.proj-modal-dialog { background-color: rgba(10, 12, 30, 0.97) !important; }
-.tp-card { background-color: rgba(10, 12, 30, 0.97) !important; }
+.pcb-panel,
+.proj-modal-dialog,
+.tp-card {
+  background-color: rgba(10, 12, 30, 0.97) !important;
+  background-image: linear-gradient(180deg, rgba(14, 17, 40, 0.97), rgba(8, 10, 26, 0.97)) !important;
+}
 
 html[data-theme="light"] .pcb-panel,
 html[data-theme="light"] .proj-modal-dialog,
-html[data-theme="light"] .tp-card { background-color: rgba(255, 255, 255, 0.97) !important; }
+html[data-theme="light"] .tp-card {
+  background-color: rgba(255, 255, 255, 0.97) !important;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95)) !important;
+}
+
+.proj-modal-backdrop { background-color: rgba(4, 6, 16, 0.86) !important; }
+.tp-overlay { background-color: rgba(4, 6, 16, 0.84) !important; }
 
 /* --- 8. Mobile et ecrans tactiles : zero flou --------------------------- */
 @media (hover: none), (max-width: 900px) {
@@ -117,14 +130,31 @@ html[data-theme="light"] .tp-card { background-color: rgba(255, 255, 255, 0.97) 
     backdrop-filter: none !important;
   }
 
-  nav.site-nav { background-color: rgba(6, 8, 22, 0.94) !important; }
-  nav.mnav-list { background-color: rgba(6, 8, 22, 0.97) !important; }
+  /* Sans flou, ces surfaces doivent etre opaques pour rester lisibles. */
+  nav.site-nav {
+    background-color: rgba(6, 8, 22, 0.95) !important;
+    background-image: linear-gradient(180deg, rgba(8, 10, 26, 0.95), rgba(5, 7, 20, 0.93)) !important;
+  }
+
+  nav.mnav-list {
+    background-color: rgba(6, 8, 22, 0.98) !important;
+    background-image: linear-gradient(180deg, rgba(8, 10, 26, 0.98), rgba(5, 7, 20, 0.98)) !important;
+  }
+
+  html[data-theme="light"] nav.site-nav {
+    background-color: rgba(255, 255, 255, 0.96) !important;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.94)) !important;
+  }
+
+  html[data-theme="light"] nav.mnav-list {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.98)) !important;
+  }
+
   .mnav-scrim { background-color: rgba(0, 0, 0, 0.55) !important; }
-  html[data-theme="light"] nav.site-nav { background-color: rgba(255, 255, 255, 0.95) !important; }
-  html[data-theme="light"] nav.mnav-list { background-color: rgba(255, 255, 255, 0.98) !important; }
   .lb-overlay { background-color: rgba(0, 0, 0, 0.93) !important; }
-  .proj-modal-backdrop { background-color: rgba(4, 6, 16, 0.90) !important; }
-  .tp-overlay { background-color: rgba(4, 6, 16, 0.88) !important; }
+  .proj-modal-backdrop { background-color: rgba(4, 6, 16, 0.92) !important; }
+  .tp-overlay { background-color: rgba(4, 6, 16, 0.90) !important; }
   body::before { filter: none !important; }
 }
 
