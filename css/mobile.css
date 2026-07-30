@@ -560,11 +560,20 @@ body.mnav-lock {
   }
   .cr-tile { border-radius: 16px !important; }
 
-  /* ---- 5.11 Projets : une seule colonne ---- */
-  .proj-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-  .proj-cover { height: clamp(200px, 54vw, 264px) !important; }
-  .proj-body { padding: 18px 16px 16px !important; }
-  .proj-title { font-size: 18px !important; }
+  /* ---- 5.11 Projets : 1 colonne, image pleine largeur, texte lisible ---- */
+  .proj-layout { grid-template-columns: 1fr !important; gap: 0 !important; }
+  .proj-intro { max-width: 100% !important; }
+  .proj-intro-title { font-size: 22px !important; margin-bottom: 10px !important; }
+  .proj-intro-text { max-width: 100% !important; margin: 0 0 18px !important; font-size: 14px !important; }
+  .proj-count { display: inline-flex !important; margin: 0 0 26px !important; padding-top: 14px !important; }
+  .proj-count-num { font-size: 21px !important; }
+  .proj-grid { grid-template-columns: 1fr !important; gap: 22px !important; }
+  .proj-body { padding: 20px 18px 18px !important; gap: 11px !important; }
+  .proj-title { font-size: 20px !important; }
+  .proj-desc { max-width: 100% !important; font-size: 14.5px !important; line-height: 1.65 !important; }
+  .proj-badges { gap: 6px !important; margin-top: 4px !important; }
+  .proj-badge { padding: 4px 10px !important; font-size: 10.5px !important; }
+  .proj-foot { padding-top: 16px !important; }
 
   /* ---- 5.12 Benevolat ---- */
   .volunteer-card { padding: 20px 18px !important; border-radius: 18px !important; }
@@ -690,7 +699,11 @@ body.mnav-lock {
   .cr-videos { grid-auto-columns: 40%; }
   .contact-actions { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .contact-btn:first-child { grid-column: 1 / -1; }
-  .proj-grid { gap: 18px !important; }
+  /* tablette : 2 cartes par ligne, tailles legerement reduites */
+  .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 24px 18px !important; }
+  .proj-body { padding: 20px 20px 18px !important; }
+  .proj-title { font-size: 19px !important; }
+  .proj-desc { font-size: 14px !important; }
 }
 
 /* --- 414 / 430 px --------------------------------------------------------- */
@@ -742,8 +755,9 @@ body.mnav-lock {
   .mnav-close:active { transform: scale(0.97); }
   .lift:hover,
   .lift-media:hover,
-  .edu-card:hover,
-  .proj-card:hover { transform: none; box-shadow: var(--lg-sh), var(--lg-hi); }
+  .edu-card:hover { transform: none; box-shadow: var(--lg-sh), var(--lg-hi); }
+  .proj-card:hover { transform: none; box-shadow: var(--proj-card-shadow); }
+  .proj-card:active { transform: scale(0.995); }
 }
 
 @media (max-width: 768px) {
@@ -813,8 +827,6 @@ body.mnav-lock {
   .cr-more:active { transform: scale(0.98); }
   .cr-more[hidden] { display: none !important; }
 
-  /* cartes projets un peu plus basses : la page reste lisible sans etre longue */
-  .proj-cover { height: clamp(180px, 46vw, 230px) !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
