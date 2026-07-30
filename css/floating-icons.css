@@ -1,0 +1,231 @@
+/* =========================================================================
+   Achraf Belghiti - Portfolio
+   FLOATING ICONS - arriere-plan anime du hero
+   Chemin : ./css/floating-icons.css (chargee APRES ./css/perf.css)
+   -----------------------------------------------------------------------
+   Composant "FloatingIcons". Le balisage est genere par
+   ./js/floating-icons.js dans une couche <div class="fx-layer"> inseree
+   comme premier enfant de <section class="hero"> :
+
+     .fx-layer > .fx-icon > .fx-orb > img
+
+   Principe (un seul jeu de regles, aucune duplication) :
+   - tout est parametre par variables CSS posees en inline par le JS
+     (--fx-x, --fx-y, --fx-size, --fx-op, --fx-dur, --fx-delay, --fx-rot,
+      --fx-amp, --fx-drift, --fx-dir) ;
+   - deux calques imbriques pour ne jamais melanger deux transforms :
+       .fx-icon -> position + parallaxe   (--fx-par, mise a jour par le JS)
+       .fx-orb  -> flottement + rotation  (animation CSS infinie)
+   - aucun backdrop-filter (cf. perf.css), aucune ombre lourde :
+     uniquement des proprietes composites (transform / opacity).
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. La couche et l'empilement (le contenu du hero passe toujours devant)
+   ------------------------------------------------------------------------- */
+.hero { position: relative; }
+
+.hero > .hero-text,
+.hero > .hero-media {
+  position: relative;
+  z-index: 2;
+}
+
+.fx-layer {
+  --fx-k: 1;                 /* facteur de taille (reduit sur petits ecrans) */
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;          /* aucune icone ne depasse du hero */
+  pointer-events: none;      /* le hero reste entierement cliquable */
+  contain: layout paint;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.fx-layer.is-ready { opacity: 1; }
+
+/* -------------------------------------------------------------------------
+   2. Une icone : position + parallaxe
+   ------------------------------------------------------------------------- */
+.fx-icon {
+  --fx-x: 50%;
+  --fx-y: 50%;
+  --fx-size: 48px;
+  --fx-op: 0.24;             /* 0.15 a 0.35 */
+  --fx-amp: 18px;            /* amplitude verticale du flottement */
+  --fx-drift: 8px;           /* leger balancement horizontal */
+  --fx-rot: 6deg;            /* rotation tres legere */
+  --fx-dur: 18s;
+  --fx-delay: 0s;
+  --fx-dir: normal;
+  --fx-par: 0px;             /* parallaxe : ecrite par le JS au defilement */
+
+  position: absolute;
+  left: var(--fx-x);
+  top: var(--fx-y);
+  width: calc(var(--fx-size) * var(--fx-k));
+  height: calc(var(--fx-size) * var(--fx-k));
+  margin: calc(var(--fx-size) * var(--fx-k) / -2);   /* centre sur le point */
+  transform: translate3d(0, var(--fx-par), 0);
+  pointer-events: auto;      /* survol possible, sans gener le contenu */
+}
+
+/* Zone de proximite : le survol se declenche avant d'atteindre l'icone. */
+.fx-icon::after {
+  content: "";
+  position: absolute;
+  inset: -34px;
+  border-radius: 50%;
+}
+
+/* -------------------------------------------------------------------------
+   3. Le flottement (une seule animation pour toutes les icones)
+   ------------------------------------------------------------------------- */
+.fx-orb {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  transform: translate3d(0, 0, 0);
+  animation: fx-float var(--fx-dur) ease-in-out var(--fx-delay) infinite;
+  animation-direction: var(--fx-dir);
+  will-change: transform;
+}
+
+@keyframes fx-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(calc(var(--fx-rot) * -1)) scale(1);
+  }
+  25% {
+    transform: translate3d(var(--fx-drift), calc(var(--fx-amp) * -0.55), 0) rotate(0deg) scale(1.02);
+  }
+  50% {
+    transform: translate3d(0, calc(var(--fx-amp) * -1), 0) rotate(var(--fx-rot)) scale(1);
+  }
+  75% {
+    transform: translate3d(calc(var(--fx-drift) * -1), calc(var(--fx-amp) * -0.35), 0) rotate(0deg) scale(0.985);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(calc(var(--fx-rot) * -1)) scale(1);
+  }
+}
+
+/* -------------------------------------------------------------------------
+   4. Apparence : halo doux, verre discret, couleurs d'origine conservees
+   ------------------------------------------------------------------------- */
+
+/* Halo flou derriere l'icone (rasterise une seule fois, il se contente
+   de suivre le calque anime : aucun recalcul pendant l'animation). */
+.fx-orb::before {
+  content: "";
+  position: absolute;
+  inset: -26%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(3, 20, 175, 0.16), rgba(3, 20, 175, 0) 72%);
+  filter: blur(7px);
+  opacity: 0.85;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+/* Pastille "verre" tres discrete, pour detacher les logos monochromes. */
+.fx-orb::after {
+  content: "";
+  position: absolute;
+  inset: -14%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.10));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  opacity: 0.45;
+  transition: opacity 0.45s ease;
+}
+
+.fx-icon img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: var(--fx-op);
+  /* Les logos gardent leurs couleurs d'origine : simple desaturation
+     legere pour qu'ils se fondent dans la palette du portfolio. */
+  filter: saturate(0.82);
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Themes : le halo suit le fond, jamais les logos. */
+html[data-theme="dark"] .fx-orb::before {
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0) 72%);
+}
+
+html[data-theme="dark"] .fx-orb::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+  border-color: rgba(255, 255, 255, 0.10);
+  opacity: 0.6;
+}
+
+/* -------------------------------------------------------------------------
+   5. Survol / proximite : echelle, opacite et halo plus doux
+   ------------------------------------------------------------------------- */
+.fx-icon:hover img,
+.fx-icon.is-near img {
+  opacity: clamp(0.42, calc(var(--fx-op) + 0.32), 0.72);
+  filter: saturate(1);
+  transform: translate3d(0, 0, 0) scale(1.14);
+}
+
+.fx-icon:hover .fx-orb::before,
+.fx-icon.is-near .fx-orb::before {
+  opacity: 1;
+  transform: scale(1.22);
+}
+
+.fx-icon:hover .fx-orb::after,
+.fx-icon.is-near .fx-orb::after { opacity: 0.7; }
+
+/* -------------------------------------------------------------------------
+   6. Responsive : moins de mouvement et icones plus petites
+   (le nombre d'icones, lui, est gere par floating-icons.js)
+   ------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .fx-layer { --fx-k: 0.86; }
+  .fx-icon { --fx-amp: 13px; --fx-drift: 6px; }
+}
+
+@media (max-width: 640px) {
+  .fx-layer { --fx-k: 0.68; }
+  .fx-icon {
+    --fx-amp: 9px;
+    --fx-drift: 3px;
+    --fx-rot: 4deg;
+  }
+  .fx-orb::before { filter: blur(5px); }
+}
+
+/* Ecrans tactiles : pas d'etat de survol collant. */
+@media (hover: none) {
+  .fx-icon { pointer-events: none; }
+}
+
+/* -------------------------------------------------------------------------
+   7. Accessibilite : mouvement respectueux et decor jamais imprime
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fx-layer { transition: none; }
+  .fx-orb {
+    animation: none !important;
+    transform: none !important;
+  }
+  .fx-icon { transform: none !important; }
+  .fx-icon img,
+  .fx-orb::before,
+  .fx-orb::after { transition: none !important; }
+}
+
+@media print {
+  .fx-layer { display: none !important; }
+}
