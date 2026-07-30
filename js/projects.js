@@ -81,6 +81,7 @@
         'Création d’une connexion émotionnelle entre le produit et le consommateur'
       ],
       skills: ['Branding', 'Storytelling', 'Production audiovisuelle', 'Scénario', 'Montage vidéo', 'Étalonnage', 'Marketing de contenu'],
+      cardTags: ['Branding', 'Storytelling', 'Vidéo'],
       pdf: './documents/CHOCO%20BITES_compressed.pdf',
       pdfName: 'CHOCO BITES_compressed.pdf',
       cover: './images/projects/choco-bites-cover.png',
@@ -145,6 +146,7 @@
         'Développement d’une expérience client différenciante'
       ],
       skills: ['Brand strategy', 'Identité visuelle', 'Analyse concurrentielle', 'SWOT', 'Marketing mix', 'Buyer persona', 'UI concept', 'Expérience client', 'Stratégie digitale'],
+      cardTags: ['Brand strategy', 'Identité visuelle', 'Marketing'],
       pdf: './documents/Lueur%20%26%20co_compressed.pdf',
       pdfName: 'Lueur & co_compressed.pdf',
       cover: './images/projects/lueur-co-cover.png',
@@ -210,6 +212,7 @@
         'Création d’une stratégie de communauté, de fidélisation et de rétention'
       ],
       skills: ['UX/UI', 'Application mobile', 'Branding', 'Benchmark', 'Stratégie digitale', 'Content marketing', 'Publicité digitale', 'E-mailing', 'SEO', 'KPI', 'Fidélisation'],
+      cardTags: ['UX/UI', 'Application', 'Marketing digital'],
       pdf: './documents/projet%20MOODTRIP_compressed%20(1).pdf',
       pdfName: 'projet MOODTRIP_compressed (1).pdf',
       cover: './images/projects/moodtrip-cover.png',
@@ -273,6 +276,7 @@
         'Présentation professionnelle d’une gamme de bougies artisanales'
       ],
       skills: ['Branding', 'Identité visuelle', 'Packaging', 'Direction artistique', 'Buyer persona', 'Positionnement', 'Storytelling de marque', 'Design graphique'],
+      cardTags: ['Branding', 'Packaging', 'Direction artistique'],
       pdf: './documents/Aphrodite_compressed.pdf',
       pdfName: 'Aphrodite_compressed.pdf',
       cover: './images/projects/aphrodite-cover.png',
@@ -373,8 +377,12 @@
      CARTES (generees automatiquement depuis le tableau projects)
      ======================================================================= */
   function cardHtml(p, index) {
-    return '<article class="proj-card lift" data-proj-id="' + esc(p.id) + '" data-index="' + index + '"'
-         +   (REDUCE ? '' : ' data-reveal=""') + '>'
+    /* Badges de carte : 3 libelles courts (champ "cardTags"). Les competences
+       completes restent affichees dans la fenetre detaillee. */
+    var tags = (p.cardTags && p.cardTags.length) ? p.cardTags : p.skills;
+
+    return '<article class="proj-card" data-proj-id="' + esc(p.id) + '" data-index="' + index + '"'
+         +   (REDUCE ? '' : ' data-proj-reveal=""') + '>'
          +   '<div class="proj-cover' + (p.cover && p.coverHasText ? ' proj-cover-baked' : '') + '">'
          +     coverHtml(p, 'proj-cover-title')
          +   '</div>'
@@ -382,11 +390,11 @@
          +     '<span class="proj-kicker">' + esc(p.categoryShort) + '</span>'
          +     '<h3 class="proj-title">' + esc(p.title) + '</h3>'
          +     '<p class="proj-desc">' + esc(p.shortDescription) + '</p>'
-         +     '<ul class="proj-badges">' + badgesHtml(p.skills, 3) + '</ul>'
+         +     '<ul class="proj-badges">' + badgesHtml(tags, 3) + '</ul>'
          +     '<div class="proj-foot">'
          +       '<button type="button" class="proj-open" data-proj-open="' + esc(p.id) + '"'
-         +         ' aria-haspopup="dialog" aria-label="Voir les détails du projet ' + esc(p.title) + '">'
-         +         '<span>Voir les détails</span>' + ICONS.arrow
+         +         ' aria-haspopup="dialog" aria-label="Voir le projet ' + esc(p.title) + '">'
+         +         '<span>Voir le projet</span>' + ICONS.arrow
          +       '</button>'
          +       '<span class="proj-date">' + esc(p.dateShort) + '</span>'
          +     '</div>'
