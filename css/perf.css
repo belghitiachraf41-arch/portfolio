@@ -122,3 +122,16 @@ html[data-theme="light"] .tp-card { background-color: rgba(255, 255, 255, 0.97) 
     scroll-behavior: auto !important;
   }
 }
+
+/* --- 9. Barre de navigation : flou reduit (26px -> 12px) ---------------- */
+/* La nav est collante : elle est recomposee a chaque image du defilement.
+   Un rayon plus faible garde l'effet verre pour un cout tres inferieur. */
+nav.site-nav {
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+}
+
+.lb-overlay {
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+}
