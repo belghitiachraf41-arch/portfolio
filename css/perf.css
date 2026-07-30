@@ -12,6 +12,9 @@
       boucle (lg-mesh / ab-aurora / ab-grid / ab-stripes). Il invalidait
       tous les calques flous en permanence, meme sans interaction.
    4. Transitions sur box-shadow / background sur de nombreux elements.
+
+   Ordre des sections : le bloc mobile (7) doit rester avant-dernier pour
+   avoir le dernier mot sur les sections precedentes.
    ========================================================================== */
 
 /* --- 1. Verre depoli : le flou est desactive partout --------------------- */
@@ -35,7 +38,20 @@ html:root[data-theme="light"] {
   --lg-sh: 0 8px 22px -14px rgba(20, 30, 90, 0.20) !important;
 }
 
-/* --- 2. Fond plein ecran : plus aucune animation infinie ----------------- */
+/* --- 2. Seuls elements qui gardent un flou : nav et voiles plein ecran --- */
+/* La nav est collante : elle est recomposee a chaque image du defilement.
+   Un rayon plus faible garde l'effet verre pour un cout tres inferieur. */
+nav.site-nav {
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+}
+
+.lb-overlay {
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* --- 3. Fond plein ecran : plus aucune animation infinie ----------------- */
 body,
 body::before,
 body::after {
@@ -47,7 +63,7 @@ body::before {
   will-change: auto !important;
 }
 
-/* --- 3. Videos : calque isole, aucun effet par dessus -------------------- */
+/* --- 4. Videos : calque isole, aucun effet par dessus -------------------- */
 video,
 .lb-vid {
   background-color: #000 !important;
@@ -59,7 +75,7 @@ video,
   contain: paint;
 }
 
-/* --- 4. Cadres d'images : pas de flou, pas de recalcul ------------------- */
+/* --- 5. Cadres d'images : pas de flou, pas de recalcul ------------------- */
 .parallax-frame,
 .img-fallback,
 .lb-tile {
@@ -67,7 +83,7 @@ video,
   backdrop-filter: none !important;
 }
 
-/* --- 5. Boutons : on n'anime que des proprietes peu couteuses ------------ */
+/* --- 6. Boutons : on n'anime que des proprietes peu couteuses ------------ */
 button,
 #theme-toggle,
 .nav-toggle,
@@ -78,7 +94,7 @@ button,
   transition: transform 0.18s ease, opacity 0.18s ease, background-color 0.18s ease, border-color 0.18s ease !important;
 }
 
-/* --- 6. Fenetres modales : fond opaque au lieu du flou ------------------- */
+/* --- 7. Fenetres modales : fond opaque au lieu du flou ------------------- */
 .pcb-panel { background-color: rgba(10, 12, 30, 0.96) !important; }
 .proj-modal-dialog { background-color: rgba(10, 12, 30, 0.97) !important; }
 .tp-card { background-color: rgba(10, 12, 30, 0.97) !important; }
@@ -87,10 +103,11 @@ html[data-theme="light"] .pcb-panel,
 html[data-theme="light"] .proj-modal-dialog,
 html[data-theme="light"] .tp-card { background-color: rgba(255, 255, 255, 0.97) !important; }
 
-/* --- 7. Mobile et ecrans tactiles : zero flou --------------------------- */
+/* --- 8. Mobile et ecrans tactiles : zero flou --------------------------- */
 @media (hover: none), (max-width: 900px) {
   nav,
   nav.site-nav,
+  nav.mnav-list,
   .mnav-list,
   .mnav-scrim,
   .lb-overlay,
@@ -101,17 +118,17 @@ html[data-theme="light"] .tp-card { background-color: rgba(255, 255, 255, 0.97) 
   }
 
   nav.site-nav { background-color: rgba(6, 8, 22, 0.94) !important; }
-  .mnav-list { background-color: rgba(6, 8, 22, 0.97) !important; }
+  nav.mnav-list { background-color: rgba(6, 8, 22, 0.97) !important; }
   .mnav-scrim { background-color: rgba(0, 0, 0, 0.55) !important; }
   html[data-theme="light"] nav.site-nav { background-color: rgba(255, 255, 255, 0.95) !important; }
-  html[data-theme="light"] .mnav-list { background-color: rgba(255, 255, 255, 0.98) !important; }
+  html[data-theme="light"] nav.mnav-list { background-color: rgba(255, 255, 255, 0.98) !important; }
   .lb-overlay { background-color: rgba(0, 0, 0, 0.93) !important; }
   .proj-modal-backdrop { background-color: rgba(4, 6, 16, 0.90) !important; }
   .tp-overlay { background-color: rgba(4, 6, 16, 0.88) !important; }
   body::before { filter: none !important; }
 }
 
-/* --- 8. Preference systeme : aucune animation --------------------------- */
+/* --- 9. Preference systeme : aucune animation --------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -121,17 +138,4 @@ html[data-theme="light"] .tp-card { background-color: rgba(255, 255, 255, 0.97) 
     transition-duration: 0.001s !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* --- 9. Barre de navigation : flou reduit (26px -> 12px) ---------------- */
-/* La nav est collante : elle est recomposee a chaque image du defilement.
-   Un rayon plus faible garde l'effet verre pour un cout tres inferieur. */
-nav.site-nav {
-  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
-  backdrop-filter: blur(12px) saturate(140%) !important;
-}
-
-.lb-overlay {
-  -webkit-backdrop-filter: blur(8px) !important;
-  backdrop-filter: blur(8px) !important;
 }
