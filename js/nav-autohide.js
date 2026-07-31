@@ -15,8 +15,13 @@
   var lastY = window.scrollY || window.pageYOffset || 0;
   var ticking = false;
 
+  /* Styles injectes : aucun autre fichier a modifier.
+     overflow-x:hidden sur html/body empechait position:sticky de fonctionner :
+     on le remplace par overflow-x:clip (meme rendu, sans conteneur de defilement),
+     sauf quand le menu mobile verrouille le defilement (.mnav-lock). */
   var css = document.createElement("style");
   css.textContent =
+    "html:not(.mnav-lock),body:not(.mnav-lock){overflow-x:clip !important;overflow-y:visible !important}" +
     "nav{transition:transform .38s cubic-bezier(.4,0,.2,1),background .3s ease,border-color .3s ease;will-change:transform}" +
     "nav.nav-hidden{transform:translateY(calc(-100% - 24px));pointer-events:none}" +
     "@media (prefers-reduced-motion: reduce){nav{transition:none}}";
