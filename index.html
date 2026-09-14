@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="./css/perf.css">
 <link rel="stylesheet" href="./css/floating-icons.css">
 <script src="./js/floating-icons.js" defer></script>
+<link rel="stylesheet" href="./css/border-glow.css">
+<script src="./js/border-glow.js" defer></script>
   <script>try{document.documentElement.setAttribute('data-theme', localStorage.getItem('ab-theme')||'light');}catch(e){}</script>
 
   <meta name="author" content="Achraf Belghiti">
@@ -84,8 +86,11 @@
     </div>
 
     <div class="hero-media" data-reveal="zoom" style="position:relative; animation:fadeUp 0.9s ease 0.1s both;">
-      <div class="hero-frame" style="aspect-ratio: 4/5; border-radius: 24px; border: 1px solid var(--bd1); position: relative; overflow: hidden">
-        <img src="./images/portrait/portrait.jpg" alt="Achraf Belghiti" width="900" height="1125" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="eager" fetchpriority="high">
+      <div class="hero-frame border-glow-card" data-edge-sensitivity="30" data-glow-color="40 80 80" data-background-color="#120F17" data-border-radius="28" data-glow-radius="40" data-glow-intensity="1.0" data-cone-spread="25" data-animated="false" data-colors="#c084fc,#f472b6,#38bdf8" style="position: relative;">
+        <span class="edge-light"></span>
+        <div class="border-glow-inner">
+          <img src="./images/portrait/portrait.jpg" alt="Achraf Belghiti" width="900" height="1125" style="width:100%; height:100%; object-fit:cover; display:block;" decoding="async" loading="eager" fetchpriority="high">
+        </div>
       </div>
       <div class="hero-tag lift" style="position:absolute; bottom:-18px; left:-18px; background:#0314af; color:#ffffff; padding:16px 22px; border-radius:16px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
         Rabat, Maroc
