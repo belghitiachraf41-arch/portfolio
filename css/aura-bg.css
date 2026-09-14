@@ -1,6 +1,28 @@
-/* Aura Gradient — "Midnight Sapphire"
-   Full-page atmospheric background using layered CSS blend modes.
-   Shown in LIGHT theme only — dark theme keeps its current look untouched. */
+/* Aura Gradient backgrounds — layered CSS blend-mode auras.
+   Light theme: "Midnight Sapphire". Dark theme: "Neon Ring".
+   Each theme's own layers are used; nothing else about the theme changes. */
+
+.aura-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.aura-layer-1,
+.aura-layer-2,
+.aura-layer-3 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* ==========================================================================
+   LIGHT THEME — "Midnight Sapphire"
+   ========================================================================== */
 
 /* Flat base color behind the blend layers, overriding the site's existing
    light-theme background (mesh gradient / animated stripes) so the aura
@@ -18,50 +40,85 @@ html[data-theme="light"] body::after {
   opacity: 0 !important;
 }
 
-/* Dark theme: hide the aura entirely, nothing else changes. */
-html[data-theme="dark"] .aura-bg {
+html[data-theme="light"] .aura-layer-1 {
+  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(61, 90, 255, 0.12) 28%, rgb(255, 255, 255) 18%, rgb(45, 55, 135) 68%, rgb(20, 25, 60) 100%);
+  mix-blend-mode: multiply;
+  filter: blur(90px);
+}
+
+html[data-theme="light"] .aura-layer-2 {
+  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(61, 90, 255, 0.22) 34%, rgb(255, 255, 255) 66%, rgb(45, 55, 135) 82%, rgb(20, 25, 60) 100%);
+  mix-blend-mode: multiply;
+  filter: blur(90px);
+}
+
+/* Light theme's aura only uses 2 layers */
+html[data-theme="light"] .aura-layer-3 {
   display: none;
 }
 
-.aura-bg {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.aura-layer-1,
-.aura-layer-2 {
-  position: absolute;
-  inset: 0;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-.aura-layer-1 {
-  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(61, 90, 255, 0.12) 28%, rgb(255, 255, 255) 18%, rgb(45, 55, 135) 68%, rgb(20, 25, 60) 100%);
-  filter: blur(90px);
-}
-
-.aura-layer-2 {
-  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(61, 90, 255, 0.22) 34%, rgb(255, 255, 255) 66%, rgb(45, 55, 135) 82%, rgb(20, 25, 60) 100%);
-  filter: blur(90px);
-}
-
-/* Desktop: stronger blur, matching the spec's 130px value */
 @media (min-width: 900px) {
-  .aura-layer-1,
-  .aura-layer-2 {
+  html[data-theme="light"] .aura-layer-1,
+  html[data-theme="light"] .aura-layer-2 {
     filter: blur(130px);
+  }
+}
+
+/* ==========================================================================
+   DARK THEME — "Neon Ring"
+   ========================================================================== */
+
+/* Flat base color behind the blend layers, overriding the site's existing
+   dark-theme background so the aura composites cleanly. The attribute
+   selector here outweighs the unconditional "body{...}" rules in
+   style.css, so this wins regardless of source order. */
+html[data-theme="dark"] body {
+  background: #100e0b !important;
+  animation: none !important;
+}
+
+/* Neutralize the existing dark-theme aurora halo + overlay so it doesn't
+   double up visually with the new Neon Ring layers below. */
+html[data-theme="dark"] body::before,
+html[data-theme="dark"] body::after {
+  opacity: 0 !important;
+}
+
+html[data-theme="dark"] .aura-layer-1 {
+  background: radial-gradient(circle at 50% 50%, transparent 34%, rgba(34, 211, 238, 0.22) 38%, rgba(59, 130, 246, 0.22) 42%, rgba(139, 92, 246, 0.20) 46%, rgba(236, 72, 153, 0.18) 50%, rgba(245, 158, 11, 0.14) 54%, transparent 61%);
+  mix-blend-mode: screen;
+  filter: blur(70px);
+}
+
+html[data-theme="dark"] .aura-layer-2 {
+  background: radial-gradient(circle at 50% 50%, transparent 42%, rgba(255, 255, 255, 0.16) 46%, transparent 51%);
+  mix-blend-mode: screen;
+  filter: blur(30px);
+  opacity: 0.85;
+}
+
+html[data-theme="dark"] .aura-layer-3 {
+  background: radial-gradient(circle at 50% 50%, #030306 0%, #030306 34%, transparent 35%);
+  mix-blend-mode: multiply;
+  filter: blur(20px);
+}
+
+@media (min-width: 900px) {
+  html[data-theme="dark"] .aura-layer-1 {
+    filter: blur(101px);
+  }
+  html[data-theme="dark"] .aura-layer-2 {
+    filter: blur(43px);
+  }
+  html[data-theme="dark"] .aura-layer-3 {
+    filter: blur(29px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .aura-layer-1,
-  .aura-layer-2 {
+  .aura-layer-2,
+  .aura-layer-3 {
     will-change: auto;
   }
 }
