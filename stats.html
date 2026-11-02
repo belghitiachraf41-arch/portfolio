@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Statistiques</title>
+<style>
+  body{font-family:system-ui,sans-serif;background:#0f1115;color:#e8e8e8;margin:0;padding:40px 16px;display:flex;justify-content:center}
+  .box{max-width:420px;width:100%;text-align:center}
+  h1{font-size:20px;font-weight:600;margin-bottom:24px}
+  .card{background:#1a1d24;border-radius:12px;padding:24px;margin-bottom:16px}
+  .num{font-size:42px;font-weight:700;color:#4da3ff}
+  .lbl{font-size:14px;color:#9aa0a6;margin-top:6px}
+  a{display:inline-block;margin-top:12px;color:#4da3ff;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Visites du portfolio</h1>
+  <div class="card"><div class="num" id="total">…</div><div class="lbl">Visites au total</div></div>
+  <div class="card"><div class="num" id="home">…</div><div class="lbl">Visites de la page d'accueil</div></div>
+  <a id="dash" href="#" target="_blank" rel="noopener">Voir le détail (pays, appareils, provenance)</a>
+</div>
+<script>
+  var CODE = "achrafbelghiti";
+  var base = "https://" + CODE + ".goatcounter.com";
+  document.getElementById("dash").href = base;
+  function load(path, id){
+    fetch(base + "/counter/" + encodeURIComponent(path) + ".json")
+      .then(function(r){ return r.ok ? r.json() : {count:"0"}; })
+      .then(function(d){ document.getElementById(id).textContent = d.count; })
+      .catch(function(){ document.getElementById(id).textContent = "—"; });
+  }
+  load("TOTAL", "total");
+  load("/portfolio/", "home");
+</script>
+</body>
+</html>
